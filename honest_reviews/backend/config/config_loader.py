@@ -1,6 +1,8 @@
 from loguru import logger
 import configparser
 from dataclasses import dataclass
+from pathlib import Path
+import configparser
 
 @dataclass
 class Config:
@@ -14,8 +16,11 @@ class Config:
 class ConfigLoader:
     @staticmethod
     def load_config(config_path: str = 'config.ini') -> Config:
+        base_dir = Path(__file__).resolve().parent
+        full_path = base_dir / config_path
+
         config = configparser.ConfigParser()
-        config.read(config_path)
+        config.read(full_path)
 
         loaded_config = Config(
             chromedriver_path=config['Paths']['chromedriver_path'],

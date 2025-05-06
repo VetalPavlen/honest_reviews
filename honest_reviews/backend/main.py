@@ -8,7 +8,7 @@ if __name__ == "__main__":
     logger.add("logs/review_scraper.log", rotation="1 MB", level="DEBUG")
 
     try:
-        config = ConfigLoader.load_config("config/config.ini")
+        config = ConfigLoader.load_config("config.ini")
         proxy_manager = ProxyManager(config)
         proxy = proxy_manager.get_random_proxy()
         if proxy:
