@@ -1,50 +1,115 @@
-# Имитация пользовательского поведения
-from selenium import webdriver  # ← вот этого не хватает
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.common.by import By
 import random
 import time
+from typing import Optional
+from selenium.webdriver import Chrome
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from loguru import logger
 
 
 class HumanInteraction:
     @staticmethod
-    def simulate(driver: webdriver.Chrome) -> bool:
+    def simulate_random_interaction(driver: Chrome) -> bool:
+        """Безопасная имитация случайных действий пользователя"""
         try:
-            driver.maximize_window()
-            time.sleep(random.uniform(0.5, 1.5))
-
             action = ActionChains(driver)
-            body = driver.find_element(By.TAG_NAME, 'body')
+            viewport_width = driver.execute_script("return window.innerWidth")
+            viewport_height = driver.execute_script("return window.innerHeight")
 
-            action.move_to_element_with_offset(body, 100, 100).perform()
-            time.sleep(random.uniform(0.3, 0.7))
+            # 1. Плавное перемещение внутри видимой области
+            for _ in range(random.randint(3, 5)):
+                x = random.randint(0, viewport_width - 1)
+                y = random.randint(0, viewport_height - 1)
+                action.move_by_offset(x, y).pause(random.uniform(0.2, 0.5)).perform()
+                action.reset_actions()
 
-            for _ in range(random.randint(2, 4)):
-                x_offset = random.randint(-200, 200)
-                y_offset = random.randint(-200, 200)
-                action.move_by_offset(x_offset, y_offset).perform()
-                time.sleep(random.uniform(0.2, 0.5))
+            # 2. Клик по случайному элементу (если есть)
+            clickable_elements = driver.find_elements(By.CSS_SELECTOR, "a, button, [onclick]")
+            if clickable_elements and random.random() > 0.5:
+                elem = random.choice(clickable_elements)
+                try:
+                    action.move_to_element(elem).pause(0.5).click().perform()
+                    time.sleep(random.uniform(1.0, 2.0))
+                except:
+                    pass  # Игнорируем ошибки кликов
 
-            if random.random() > 0.5:
-                action.click().perform()
-                time.sleep(random.uniform(0.5, 1.2))
+            # 3. Имитация прокрутки
+            if random.random() > 0.3:
+                scroll_amount = random.randint(200, 800)
+                driver.execute_script(f"window.scrollBy(0, {scroll_amount})")
+                time.sleep(random.uniform(0.5, 1.5))
 
             return True
         except Exception as e:
+            logger.debug(f"Ошибка в simulate_random_interaction: {str(e)[:200]}")
             return False
 
     @staticmethod
-    def smart_scroll(driver: webdriver.Chrome) -> bool:
+    def simulate_reading(driver: Chrome, max_reviews: int = 5) -> bool:
+        """Имитация чтения отзывов с безопасными перемещениями"""
         try:
-            for i in range(1, 4):
-                scroll_height = driver.execute_script("return document.body.scrollHeight")
-                scroll_point = scroll_height * (i / 4)
-                driver.execute_script(f"window.scrollTo(0, {scroll_point})")
-                time.sleep(random.uniform(1.0, 2.0))
+            viewport_height = driver.execute_script("return window.innerHeight")
+            action = ActionChains(driver)
 
-            driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
-            time.sleep(random.uniform(1.5, 2.5))
+            reviews = driver.find_elements(By.CSS_SELECTOR, "div.business-review-view")
+            if not reviews:
+                return False
+
+            for _ in range(min(max_reviews, len(reviews))):
+                review = random.choice(reviews)
+
+                # Плавное перемещение к отзыву
+                driver.execute_script("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'})", review)
+                time.sleep(random.uniform(0.5, 1.5))
+
+                # Наведение и пауза
+                try:
+                    action.move_to_element(review).pause(random.uniform(2.0, 4.0)).perform()
+                    action.reset_actions()
+                except:
+                    pass
+
+                # Случайное раскрытие отзыва
+                if random.random() > 0.7:
+                    try:
+                        expand_btn = review.find_element(By.CSS_SELECTOR, "button[aria-expanded='false']")
+                        expand_btn.click()
+                        time.sleep(random.uniform(1.0, 2.0))
+                    except:
+                        pass
 
             return True
         except Exception as e:
+            logger.debug(f"Ошибка в simulate_reading: {str(e)[:200]}")
+            return False
+
+    @staticmethod
+    def smart_scroll(driver: Chrome) -> bool:
+        """Безопасная прокрутка страницы"""
+        try:
+            scroll_height = driver.execute_script("return document.body.scrollHeight")
+            window_height = driver.execute_script("return window.innerHeight")
+
+            if scroll_height <= window_height:
+                return False
+
+            # Плавная прокрутка с паузами
+            for step in range(1, random.randint(3, 5)):
+                scroll_to = min(scroll_height, step * window_height // 2)
+                driver.execute_script(f"window.scrollTo(0, {scroll_to})")
+                time.sleep(random.uniform(0.8, 1.8))
+
+                # Иногда прокручиваем немного назад
+                if random.random() > 0.7:
+                    driver.execute_script(f"window.scrollBy(0, -{random.randint(50, 150)})")
+                    time.sleep(random.uniform(0.5, 1.0))
+
+            # Финишная прокрутка
+            driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
+            time.sleep(random.uniform(1.0, 2.0))
+
+            return True
+        except Exception as e:
+            logger.debug(f"Ошибка в smart_scroll: {str(e)[:200]}")
             return False

@@ -13,7 +13,7 @@ if __name__ == "__main__":
         if proxy:
             logger.info(f"Используется прокси: {proxy}")
             parser = YandexReviewsParser(config, proxy)
-            org_id = "170837487282"
+            org_id = "1044825142"
             if parser.parse_reviews(org_id):
                 logger.info("Парсинг завершен успешно")
             else:
