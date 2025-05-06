@@ -5,7 +5,6 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from loguru import logger
 import zipfile
-import tempfile
 
 
 class BrowserManager:
@@ -29,14 +28,20 @@ class BrowserManager:
         options.add_argument(f"user-agent={random.choice(self.user_agents)}")
 
         if proxy:
-            proxy_parts = proxy.split(":")
-            if len(proxy_parts) == 2:
-                options.add_argument(f"--proxy-server=http://{proxy}")
-            elif len(proxy_parts) == 4:
-                proxy_auth = self._create_proxy_auth_extension(*proxy_parts)
+            try:
+                proxy_host, proxy_port = proxy.split(":")
+                proxy_user = self.config.proxy_username
+                proxy_pass = self.config.proxy_password
+
+                proxy_auth = self._create_proxy_auth_extension(
+                    proxy_host=proxy_host,
+                    proxy_port=proxy_port,
+                    proxy_user=proxy_user,
+                    proxy_pass=proxy_pass
+                )
                 options.add_extension(proxy_auth)
-            else:
-                logger.error(f"Неверный формат прокси: {proxy}")
+            except ValueError:
+                logger.error(f"Неверный формат прокси: {proxy}. Ожидается host:port")
                 return None
 
         try:
@@ -47,9 +52,8 @@ class BrowserManager:
         except Exception as e:
             logger.error(f"Ошибка при инициализации драйвера: {e}")
             return None
-
     def _create_proxy_auth_extension(self, proxy_host: str, proxy_port: str,
-                                     proxy_user: str, proxy_pass: str) -> str:
+                                   proxy_user: str, proxy_pass: str) -> str:
         """Создание расширения для аутентификации прокси"""
         manifest_json = """
         {
@@ -72,44 +76,43 @@ class BrowserManager:
         }
         """
 
-        background_js = f"""
-        var config = {{
+        background_js = """
+        var config = {
             mode: "fixed_servers",
-            rules: {{
-                singleProxy: {{
+            rules: {
+                singleProxy: {
                     scheme: "http",
-                    host: "{proxy_host}",
-                    port: parseInt({proxy_port})
-                }},
+                    host: "%s",
+                    port: parseInt(%s)
+                },
                 bypassList: ["localhost"]
-            }}
-        }};
+            }
+        };
 
-        chrome.proxy.settings.set({{value: config, scope: "regular"}}, function() {{}});
+        chrome.proxy.settings.set({value: config, scope: "regular"}, function() {});
 
-        function callbackFn(details) {{
-            return {{
-                authCredentials: {{
-                    username: "{proxy_user}",
-                    password: "{proxy_pass}"
-                }}
-            }};
-        }}
+        function callbackFn(details) {
+            return {
+                authCredentials: {
+                    username: "%s",
+                    password: "%s"
+                }
+            };
+        }
 
         chrome.webRequest.onAuthRequired.addListener(
             callbackFn,
-            {{urls: ["<all_urls>"]}},
+            {urls: ["<all_urls>"]},
             ['blocking']
         );
-        """
+        """ % (proxy_host, proxy_port, proxy_user, proxy_pass)
 
-        # Создание временного файла для расширения
-        pluginfile = tempfile.NamedTemporaryFile(suffix='.zip', delete=False)
-        with zipfile.ZipFile(pluginfile.name, 'w') as zp:
+        proxy_auth_plugin = 'proxy_auth_plugin.zip'
+        with zipfile.ZipFile(proxy_auth_plugin, 'w') as zp:
             zp.writestr("manifest.json", manifest_json)
             zp.writestr("background.js", background_js)
 
-        return pluginfile.name
+        return proxy_auth_plugin
 
     def _hide_automation(self, driver: webdriver.Chrome):
         driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {

@@ -6,21 +6,21 @@ import time
 import random
 from loguru import logger
 from honest_reviews.backend.app.secondary_functions.human_interaction import HumanInteraction
-from honest_reviews.backend.app.secondary_functions.proxy_manager import ProxyManager
 from honest_reviews.backend.app.secondary_functions.browser_manager import BrowserManager
 
 
 class YandexReviewsParser:
-    def __init__(self, config):
+    def __init__(self, config, proxy=None):
         self.config = config
-        self.proxy_manager = ProxyManager(config)
+        self.proxy = proxy
         self.browser_manager = BrowserManager(config)
 
     def parse_reviews(self, org_id: str) -> bool:
-        proxy = self.proxy_manager.get_random_proxy()
+        proxy = self.proxy
         if not proxy:
             logger.error("Не найдено рабочих прокси")
             return False
+        # остальной код
 
         driver = None
         try:
