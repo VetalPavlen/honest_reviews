@@ -1,0 +1,75 @@
+# Управление прокси
+# Импорт необходимых модулей
+import random  # Для случайного выбора прокси
+import requests  # Для выполнения HTTP-запросов
+from requests.auth import HTTPProxyAuth  # Для аутентификации на прокси-сервере
+from loguru import logger  # Для логирования событий
+from typing import List, Optional  # Для указания типов данных
+
+
+
+class ProxyManager:
+    def __init__(self, config):
+        """
+        Инициализация менеджера прокси с конфигурацией.
+        Загружает список прокси из указанного файла.
+        """
+        self.config = config
+        self.proxies = self._load_proxies()
+
+    def _load_proxies(self) -> List[str]:
+        """
+        Загружает список прокси из файла, указанного в конфигурации.
+        Ожидается, что каждая строка файла содержит прокси в формате:
+        - IP:PORT
+        - IP:PORT:USERNAME:PASSWORD
+        Возвращает список валидных прокси-строк.
+        """
+        try:
+            with open(self.config.proxy_list_file, "r") as f:
+                proxies = []
+                for line in f:
+                    line = line.strip()
+                    if line:
+                        parts = line.split(":")
+                        if len(parts) in [2, 4]:
+                            proxies.append(line)
+                logger.info(f"Загружено {len(proxies)} валидных прокси")
+                return proxies
+        except Exception as e:
+            logger.error(f"Ошибка при чтении файла прокси: {e}")
+            return []
+
+    def get_random_proxy(self) -> Optional[str]:
+        """
+        Возвращает случайный рабочий прокси из списка.
+        Перемешивает список и проверяет первые 10 прокси на работоспособность.
+        Если рабочий прокси найден, возвращает его строку.
+        Если нет — возвращает None.
+        """
+        if not self.proxies:
+            return None
+        random.shuffle(self.proxies)
+        for proxy in self.proxies[:10]:
+            if self.is_proxy_working(proxy):
+                return proxy
+        return None
+
+    def is_proxy_working(self, proxy: str) -> bool:
+        """
+        Проверяет работоспособность прокси.
+        Поддерживает два формата:
+        - IP:PORT
+        - IP:PORT:USERNAME:PASSWORD
+        Выполняет запрос к http://httpbin.org/ip через указанный прокси.
+        Возвращает True, если ответ получен успешно (код 200), иначе False.
+        """
+        try:
+            proxy_address = f"http://{proxy}"
+            proxies = {"http": proxy_address, "https": proxy_address}
+            response = requests.get("http://httpbin.org/ip", proxies=proxies, auth=self.auth, timeout=10)
+            return response.status_code == 200
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Ошибка с прокси {proxy}: {str(e)}")
+            return False
+

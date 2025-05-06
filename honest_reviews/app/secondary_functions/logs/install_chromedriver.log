@@ -1,0 +1,20 @@
+2025-05-05 11:17:49.118 | INFO     | __main__:install_chromedriver:11 - Скачиваю совместимый chromedriver через webdriver-manager...
+2025-05-05 11:17:52.663 | SUCCESS  | __main__:install_chromedriver:13 - ✅ Chromedriver установлен: C:\Users\wangr\.wdm\drivers\chromedriver\win64\114.0.5735.90\chromedriver.exe
+2025-05-05 11:26:22.053 | INFO     | __main__:install_chromedriver:11 - Скачиваю совместимый chromedriver через webdriver-manager...
+2025-05-05 11:26:25.347 | SUCCESS  | __main__:install_chromedriver:13 - ✅ Chromedriver установлен: C:\Users\wangr\.wdm\drivers\chromedriver\win64\114.0.5735.90\chromedriver.exe
+2025-05-05 11:27:09.194 | INFO     | __main__:install_chromedriver:11 - Скачиваю совместимый chromedriver через webdriver-manager...
+2025-05-05 11:27:09.225 | ERROR    | __main__:install_chromedriver:17 - ❌ Ошибка при установке chromedriver: ChromeDriverManager.__init__() got an unexpected keyword argument 'version'
+Traceback (most recent call last):
+
+  File "C:\Users\wangr\PycharmProjects\pythonProject64\honest_reviews\app\secondary_functions\install_chromedriver.py", line 21, in <module>
+    install_chromedriver()
+    └ <function install_chromedriver at 0x00000181A26F1B20>
+
+> File "C:\Users\wangr\PycharmProjects\pythonProject64\honest_reviews\app\secondary_functions\install_chromedriver.py", line 13, in install_chromedriver
+    path = ChromeDriverManager(version=version).install()  # Указываем версию
+           │                           └ '136.0.7103.48'
+           └ <class 'webdriver_manager.chrome.ChromeDriverManager'>
+
+TypeError: ChromeDriverManager.__init__() got an unexpected keyword argument 'version'
+2025-05-05 11:27:37.998 | INFO     | __main__:install_chromedriver:11 - Скачиваю совместимый chromedriver через webdriver-manager...
+2025-05-05 11:27:41.057 | SUCCESS  | __main__:install_chromedriver:14 - ✅ Chromedriver установлен: C:\Users\wangr\.wdm\drivers\chromedriver\win64\114.0.5735.90\chromedriver.exe

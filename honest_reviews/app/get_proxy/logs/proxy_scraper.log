@@ -1,0 +1,491 @@
+2025-05-05 11:22:35.452 | ERROR    | __main__:init_driver:38 - Ошибка при инициализации драйвера: Message: session not created: This version of ChromeDriver only supports Chrome version 114
+Current browser version is 136.0.7103.48 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x00D8A813+48355]
+	(No symbol) [0x00D1C4B1]
+	(No symbol) [0x00C25358]
+	(No symbol) [0x00C461AC]
+	(No symbol) [0x00C41EF3]
+	(No symbol) [0x00C40579]
+	(No symbol) [0x00C70C55]
+	(No symbol) [0x00C7093C]
+	(No symbol) [0x00C6A536]
+	(No symbol) [0x00C482DC]
+	(No symbol) [0x00C493DD]
+	GetHandleVerifier [0x00FEAABD+2539405]
+	GetHandleVerifier [0x0102A78F+2800735]
+	GetHandleVerifier [0x0102456C+2775612]
+	GetHandleVerifier [0x00E151E0+616112]
+	(No symbol) [0x00D25F8C]
+	(No symbol) [0x00D22328]
+	(No symbol) [0x00D2240B]
+	(No symbol) [0x00D14FF7]
+	BaseThreadInitThunk [0x75BC5D49+25]
+	RtlInitializeExceptionChain [0x7748CE3B+107]
+	RtlGetAppContainerNamedObjectPath [0x7748CDC1+561]
+
+Traceback (most recent call last):
+
+  File "C:\Users\wangr\PycharmProjects\pythonProject64\honest_reviews\app\get_proxy\proxy_scraper.py", line 91, in <module>
+    fetch_proxies()
+    └ <function fetch_proxies at 0x0000019725C2A700>
+
+  File "C:\Users\wangr\PycharmProjects\pythonProject64\honest_reviews\app\get_proxy\proxy_scraper.py", line 73, in fetch_proxies
+    driver = init_driver()
+             └ <function init_driver at 0x0000019725BF9EE0>
+
+> File "C:\Users\wangr\PycharmProjects\pythonProject64\honest_reviews\app\get_proxy\proxy_scraper.py", line 34, in init_driver
+    driver = webdriver.Chrome(service=service, options=options)
+             │         │              │                └ <selenium.webdriver.chrome.options.Options object at 0x0000019725B2D090>
+             │         │              └ <selenium.webdriver.chrome.service.Service object at 0x00000197269C9990>
+             │         └ <class 'selenium.webdriver.chrome.webdriver.WebDriver'>
+             └ <module 'selenium.webdriver' from 'C:\\Users\\wangr\\PycharmProjects\\pythonProject64\\venv\\Lib\\site-packages\\selenium\\we...
+
+  File "C:\Users\wangr\PycharmProjects\pythonProject64\venv\Lib\site-packages\selenium\webdriver\chrome\webdriver.py", line 45, in __init__
+    super().__init__(
+  File "C:\Users\wangr\PycharmProjects\pythonProject64\venv\Lib\site-packages\selenium\webdriver\chromium\webdriver.py", line 67, in __init__
+    super().__init__(command_executor=executor, options=options)
+                                      │                 └ <selenium.webdriver.chrome.options.Options object at 0x0000019725B2D090>
+                                      └ <selenium.webdriver.chromium.remote_connection.ChromiumRemoteConnection object at 0x0000019725B2C290>
+  File "C:\Users\wangr\PycharmProjects\pythonProject64\venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 260, in __init__
+    self.start_session(capabilities)
+    │    │             └ {'browserName': 'chrome', 'pageLoadStrategy': <PageLoadStrategy.normal: 'normal'>, 'goog:chromeOptions': {'extensions': [], '...
+    │    └ <function WebDriver.start_session at 0x0000019724EBE660>
+    └ <selenium.webdriver.chrome.webdriver.WebDriver (session="None")>
+  File "C:\Users\wangr\PycharmProjects\pythonProject64\venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 357, in start_session
+    response = self.execute(Command.NEW_SESSION, caps)["value"]
+               │    │       │       │            └ {'capabilities': {'firstMatch': [{}], 'alwaysMatch': {'browserName': 'chrome', 'pageLoadStrategy': <PageLoadStrategy.normal: ...
+               │    │       │       └ 'newSession'
+               │    │       └ <class 'selenium.webdriver.remote.command.Command'>
+               │    └ <function WebDriver.execute at 0x0000019724EBE980>
+               └ <selenium.webdriver.chrome.webdriver.WebDriver (session="None")>
+  File "C:\Users\wangr\PycharmProjects\pythonProject64\venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 448, in execute
+    self.error_handler.check_response(response)
+    │    │             │              └ {'status': 500, 'value': '{"value":{"error":"session not created","message":"session not created: This version of ChromeDrive...
+    │    │             └ <function ErrorHandler.check_response at 0x0000019724CEF060>
+    │    └ <selenium.webdriver.remote.errorhandler.ErrorHandler object at 0x0000019725223E90>
+    └ <selenium.webdriver.chrome.webdriver.WebDriver (session="None")>
+  File "C:\Users\wangr\PycharmProjects\pythonProject64\venv\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+          │               │        │       └ ['Backtrace:', '\tGetHandleVerifier [0x00D8A813+48355]', '\t(No symbol) [0x00D1C4B1]', '\t(No symbol) [0x00C25358]', '\t(No s...
+          │               │        └ None
+          │               └ 'session not created: This version of ChromeDriver only supports Chrome version 114\nCurrent browser version is 136.0.7103.48...
+          └ <class 'selenium.common.exceptions.SessionNotCreatedException'>
+
+selenium.common.exceptions.SessionNotCreatedException: Message: session not created: This version of ChromeDriver only supports Chrome version 114
+Current browser version is 136.0.7103.48 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x00D8A813+48355]
+	(No symbol) [0x00D1C4B1]
+	(No symbol) [0x00C25358]
+	(No symbol) [0x00C461AC]
+	(No symbol) [0x00C41EF3]
+	(No symbol) [0x00C40579]
+	(No symbol) [0x00C70C55]
+	(No symbol) [0x00C7093C]
+	(No symbol) [0x00C6A536]
+	(No symbol) [0x00C482DC]
+	(No symbol) [0x00C493DD]
+	GetHandleVerifier [0x00FEAABD+2539405]
+	GetHandleVerifier [0x0102A78F+2800735]
+	GetHandleVerifier [0x0102456C+2775612]
+	GetHandleVerifier [0x00E151E0+616112]
+	(No symbol) [0x00D25F8C]
+	(No symbol) [0x00D22328]
+	(No symbol) [0x00D2240B]
+	(No symbol) [0x00D14FF7]
+	BaseThreadInitThunk [0x75BC5D49+25]
+	RtlInitializeExceptionChain [0x7748CE3B+107]
+	RtlGetAppContainerNamedObjectPath [0x7748CDC1+561]
+
+2025-05-05 11:22:35.457 | ERROR    | __main__:fetch_proxies:88 - ❌ Ошибка при сборе прокси: Message: session not created: This version of ChromeDriver only supports Chrome version 114
+Current browser version is 136.0.7103.48 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x00D8A813+48355]
+	(No symbol) [0x00D1C4B1]
+	(No symbol) [0x00C25358]
+	(No symbol) [0x00C461AC]
+	(No symbol) [0x00C41EF3]
+	(No symbol) [0x00C40579]
+	(No symbol) [0x00C70C55]
+	(No symbol) [0x00C7093C]
+	(No symbol) [0x00C6A536]
+	(No symbol) [0x00C482DC]
+	(No symbol) [0x00C493DD]
+	GetHandleVerifier [0x00FEAABD+2539405]
+	GetHandleVerifier [0x0102A78F+2800735]
+	GetHandleVerifier [0x0102456C+2775612]
+	GetHandleVerifier [0x00E151E0+616112]
+	(No symbol) [0x00D25F8C]
+	(No symbol) [0x00D22328]
+	(No symbol) [0x00D2240B]
+	(No symbol) [0x00D14FF7]
+	BaseThreadInitThunk [0x75BC5D49+25]
+	RtlInitializeExceptionChain [0x7748CE3B+107]
+	RtlGetAppContainerNamedObjectPath [0x7748CDC1+561]
+
+Traceback (most recent call last):
+
+  File "C:\Users\wangr\PycharmProjects\pythonProject64\honest_reviews\app\get_proxy\proxy_scraper.py", line 91, in <module>
+    fetch_proxies()
+    └ <function fetch_proxies at 0x0000019725C2A700>
+
+> File "C:\Users\wangr\PycharmProjects\pythonProject64\honest_reviews\app\get_proxy\proxy_scraper.py", line 73, in fetch_proxies
+    driver = init_driver()
+             └ <function init_driver at 0x0000019725BF9EE0>
+
+  File "C:\Users\wangr\PycharmProjects\pythonProject64\honest_reviews\app\get_proxy\proxy_scraper.py", line 34, in init_driver
+    driver = webdriver.Chrome(service=service, options=options)
+             │         │              │                └ <selenium.webdriver.chrome.options.Options object at 0x0000019725B2D090>
+             │         │              └ <selenium.webdriver.chrome.service.Service object at 0x00000197269C9990>
+             │         └ <class 'selenium.webdriver.chrome.webdriver.WebDriver'>
+             └ <module 'selenium.webdriver' from 'C:\\Users\\wangr\\PycharmProjects\\pythonProject64\\venv\\Lib\\site-packages\\selenium\\we...
+
+  File "C:\Users\wangr\PycharmProjects\pythonProject64\venv\Lib\site-packages\selenium\webdriver\chrome\webdriver.py", line 45, in __init__
+    super().__init__(
+  File "C:\Users\wangr\PycharmProjects\pythonProject64\venv\Lib\site-packages\selenium\webdriver\chromium\webdriver.py", line 67, in __init__
+    super().__init__(command_executor=executor, options=options)
+                                      │                 └ <selenium.webdriver.chrome.options.Options object at 0x0000019725B2D090>
+                                      └ <selenium.webdriver.chromium.remote_connection.ChromiumRemoteConnection object at 0x0000019725B2C290>
+  File "C:\Users\wangr\PycharmProjects\pythonProject64\venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 260, in __init__
+    self.start_session(capabilities)
+    │    │             └ {'browserName': 'chrome', 'pageLoadStrategy': <PageLoadStrategy.normal: 'normal'>, 'goog:chromeOptions': {'extensions': [], '...
+    │    └ <function WebDriver.start_session at 0x0000019724EBE660>
+    └ <selenium.webdriver.chrome.webdriver.WebDriver (session="None")>
+  File "C:\Users\wangr\PycharmProjects\pythonProject64\venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 357, in start_session
+    response = self.execute(Command.NEW_SESSION, caps)["value"]
+               │    │       │       │            └ {'capabilities': {'firstMatch': [{}], 'alwaysMatch': {'browserName': 'chrome', 'pageLoadStrategy': <PageLoadStrategy.normal: ...
+               │    │       │       └ 'newSession'
+               │    │       └ <class 'selenium.webdriver.remote.command.Command'>
+               │    └ <function WebDriver.execute at 0x0000019724EBE980>
+               └ <selenium.webdriver.chrome.webdriver.WebDriver (session="None")>
+  File "C:\Users\wangr\PycharmProjects\pythonProject64\venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 448, in execute
+    self.error_handler.check_response(response)
+    │    │             │              └ {'status': 500, 'value': '{"value":{"error":"session not created","message":"session not created: This version of ChromeDrive...
+    │    │             └ <function ErrorHandler.check_response at 0x0000019724CEF060>
+    │    └ <selenium.webdriver.remote.errorhandler.ErrorHandler object at 0x0000019725223E90>
+    └ <selenium.webdriver.chrome.webdriver.WebDriver (session="None")>
+  File "C:\Users\wangr\PycharmProjects\pythonProject64\venv\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+          │               │        │       └ ['Backtrace:', '\tGetHandleVerifier [0x00D8A813+48355]', '\t(No symbol) [0x00D1C4B1]', '\t(No symbol) [0x00C25358]', '\t(No s...
+          │               │        └ None
+          │               └ 'session not created: This version of ChromeDriver only supports Chrome version 114\nCurrent browser version is 136.0.7103.48...
+          └ <class 'selenium.common.exceptions.SessionNotCreatedException'>
+
+selenium.common.exceptions.SessionNotCreatedException: Message: session not created: This version of ChromeDriver only supports Chrome version 114
+Current browser version is 136.0.7103.48 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x00D8A813+48355]
+	(No symbol) [0x00D1C4B1]
+	(No symbol) [0x00C25358]
+	(No symbol) [0x00C461AC]
+	(No symbol) [0x00C41EF3]
+	(No symbol) [0x00C40579]
+	(No symbol) [0x00C70C55]
+	(No symbol) [0x00C7093C]
+	(No symbol) [0x00C6A536]
+	(No symbol) [0x00C482DC]
+	(No symbol) [0x00C493DD]
+	GetHandleVerifier [0x00FEAABD+2539405]
+	GetHandleVerifier [0x0102A78F+2800735]
+	GetHandleVerifier [0x0102456C+2775612]
+	GetHandleVerifier [0x00E151E0+616112]
+	(No symbol) [0x00D25F8C]
+	(No symbol) [0x00D22328]
+	(No symbol) [0x00D2240B]
+	(No symbol) [0x00D14FF7]
+	BaseThreadInitThunk [0x75BC5D49+25]
+	RtlInitializeExceptionChain [0x7748CE3B+107]
+	RtlGetAppContainerNamedObjectPath [0x7748CDC1+561]
+
+2025-05-05 11:56:29.600 | INFO     | __main__:fetch_proxies:74 - Открываю https://spys.one/free-proxy-list/RU/
+2025-05-05 11:56:35.772 | ERROR    | __main__:parse_proxies:57 - Ошибка парсинга HTML: 'NoneType' object has no attribute 'find_all'
+Traceback (most recent call last):
+
+  File "C:\Users\wangr\PycharmProjects\pythonProject64\honest_reviews\app\get_proxy\proxy_scraper.py", line 91, in <module>
+    fetch_proxies()
+    └ <function fetch_proxies at 0x000002562C442700>
+
+  File "C:\Users\wangr\PycharmProjects\pythonProject64\honest_reviews\app\get_proxy\proxy_scraper.py", line 81, in fetch_proxies
+    proxies = parse_proxies(html)
+              │             └ '<html dir="ltr" lang="en"><head>\n<title>Free Russia proxy servers. Russian proxy - RU. </title>\n<meta name="keywords" cont...
+              └ <function parse_proxies at 0x000002562C4136A0>
+
+> File "C:\Users\wangr\PycharmProjects\pythonProject64\honest_reviews\app\get_proxy\proxy_scraper.py", line 45, in parse_proxies
+    rows = table.find_all("tr")[3:]
+           └ None
+
+AttributeError: 'NoneType' object has no attribute 'find_all'
+2025-05-05 11:56:35.782 | SUCCESS  | __main__:fetch_proxies:85 - ✅ Найдено и сохранено 0 прокси в proxies.txt
+2025-05-05 11:58:38.372 | INFO     | __main__:fetch_proxies:74 - Открываю https://spys.one/free-proxy-list/RU/
+2025-05-05 11:58:46.484 | ERROR    | __main__:parse_proxies:57 - Ошибка парсинга HTML: 'NoneType' object has no attribute 'find_all'
+Traceback (most recent call last):
+
+  File "C:\Users\wangr\PycharmProjects\pythonProject64\honest_reviews\app\get_proxy\proxy_scraper.py", line 94, in <module>
+    fetch_proxies()
+    └ <function fetch_proxies at 0x000001989EB82700>
+
+  File "C:\Users\wangr\PycharmProjects\pythonProject64\honest_reviews\app\get_proxy\proxy_scraper.py", line 84, in fetch_proxies
+    proxies = parse_proxies(html)
+              │             └ '<html dir="ltr" lang="en"><head>\n<title>Free Russia proxy servers. Russian proxy - RU. </title>\n<meta name="keywords" cont...
+              └ <function parse_proxies at 0x000001989EB736A0>
+
+> File "C:\Users\wangr\PycharmProjects\pythonProject64\honest_reviews\app\get_proxy\proxy_scraper.py", line 45, in parse_proxies
+    rows = table.find_all("tr")[3:]
+           └ None
+
+AttributeError: 'NoneType' object has no attribute 'find_all'
+2025-05-05 11:58:46.486 | SUCCESS  | __main__:fetch_proxies:88 - ✅ Найдено и сохранено 0 прокси в proxies.txt
+2025-05-05 12:07:24.346 | ERROR    | __main__:init_driver:18 - Chromedriver не найден по пути: C:\Users\wangr\.wdm\drivers\chromedriver\chromedriver-win64\chromedriver.exe
+2025-05-05 12:08:19.055 | ERROR    | __main__:init_driver:18 - Chromedriver не найден по пути: C:\Users\wangr\.wdm\drivers\chromedriver\chromedriver-win64\chromedriver.exe
+2025-05-05 12:08:40.527 | INFO     | __main__:fetch_proxies:55 - Открываю https://free-proxy-list.net/
+2025-05-05 12:08:46.346 | ERROR    | __main__:parse_proxies:49 - Ошибка при парсинге HTML: 'NoneType' object has no attribute 'tbody'
+Traceback (most recent call last):
+
+  File "C:\Users\wangr\PycharmProjects\pythonProject64\honest_reviews\app\get_proxy\proxy_scraper.py", line 72, in <module>
+    fetch_proxies()
+    └ <function fetch_proxies at 0x00000213F3883B00>
+
+  File "C:\Users\wangr\PycharmProjects\pythonProject64\honest_reviews\app\get_proxy\proxy_scraper.py", line 61, in fetch_proxies
+    proxies = parse_proxies(html)
+              │             └ '<html lang="en" class="  webp webp-alpha webp-animation webp-lossless"><head><meta charset="utf-8"><meta http-equiv="X-UA-Co...
+              └ <function parse_proxies at 0x00000213F3880AE0>
+
+> File "C:\Users\wangr\PycharmProjects\pythonProject64\honest_reviews\app\get_proxy\proxy_scraper.py", line 36, in parse_proxies
+    rows = table.tbody.find_all("tr")
+           └ None
+
+AttributeError: 'NoneType' object has no attribute 'tbody'
+2025-05-05 12:08:46.349 | SUCCESS  | __main__:fetch_proxies:67 - ✅ Найдено и сохранено 0 прокси в proxies.txt
+2025-05-05 12:10:45.635 | ERROR    | __main__:init_driver:21 - Chromedriver не найден по пути: C:\Users\wangr\.wdm\drivers\chromedriver\chromedriver-win64\chromedriver.exe
+2025-05-05 12:10:58.011 | INFO     | __main__:fetch_proxies:59 - Открываю https://free-proxy-list.net/
+2025-05-05 12:11:08.740 | ERROR    | __main__:fetch_proxies:79 - ❌ Ошибка при сборе прокси: Message: 
+Stacktrace:
+	GetHandleVerifier [0x00007FF6BEECA145+76773]
+	GetHandleVerifier [0x00007FF6BEECA1A0+76864]
+	(No symbol) [0x00007FF6BEC88F7A]
+	(No symbol) [0x00007FF6BECDF496]
+	(No symbol) [0x00007FF6BECDF74C]
+	(No symbol) [0x00007FF6BED32287]
+	(No symbol) [0x00007FF6BED0739F]
+	(No symbol) [0x00007FF6BED2F0CF]
+	(No symbol) [0x00007FF6BED07133]
+	(No symbol) [0x00007FF6BECD04D1]
+	(No symbol) [0x00007FF6BECD1263]
+	GetHandleVerifier [0x00007FF6BF18A8ED+2962317]
+	GetHandleVerifier [0x00007FF6BF184EC2+2939234]
+	GetHandleVerifier [0x00007FF6BF1A2FF3+3062419]
+	GetHandleVerifier [0x00007FF6BEEE4B9A+185914]
+	GetHandleVerifier [0x00007FF6BEEEC78F+217647]
+	GetHandleVerifier [0x00007FF6BEED2A44+111844]
+	GetHandleVerifier [0x00007FF6BEED2BF2+112274]
+	GetHandleVerifier [0x00007FF6BEEB8A79+5401]
+	BaseThreadInitThunk [0x00007FF80DD1E8D7+23]
+	RtlUserThreadStart [0x00007FF80EA9BF6C+44]
+
+Traceback (most recent call last):
+
+  File "C:\Users\wangr\PycharmProjects\pythonProject64\honest_reviews\app\get_proxy\proxy_scraper.py", line 82, in <module>
+    fetch_proxies()
+    └ <function fetch_proxies at 0x0000025660B3DF80>
+
+> File "C:\Users\wangr\PycharmProjects\pythonProject64\honest_reviews\app\get_proxy\proxy_scraper.py", line 63, in fetch_proxies
+    WebDriverWait(driver, 10).until(
+    │             └ <selenium.webdriver.chrome.webdriver.WebDriver (session="3bd2bd6f674c4ea106126239e6d08308")>
+    └ <class 'selenium.webdriver.support.wait.WebDriverWait'>
+
+  File "C:\Users\wangr\PycharmProjects\pythonProject64\venv\Lib\site-packages\selenium\webdriver\support\wait.py", line 146, in until
+    raise TimeoutException(message, screen, stacktrace)
+          │                │        │       └ ['\tGetHandleVerifier [0x00007FF6BEECA145+76773]', '\tGetHandleVerifier [0x00007FF6BEECA1A0+76864]', '\t(No symbol) [0x00007F...
+          │                │        └ None
+          │                └ ''
+          └ <class 'selenium.common.exceptions.TimeoutException'>
+
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+	GetHandleVerifier [0x00007FF6BEECA145+76773]
+	GetHandleVerifier [0x00007FF6BEECA1A0+76864]
+	(No symbol) [0x00007FF6BEC88F7A]
+	(No symbol) [0x00007FF6BECDF496]
+	(No symbol) [0x00007FF6BECDF74C]
+	(No symbol) [0x00007FF6BED32287]
+	(No symbol) [0x00007FF6BED0739F]
+	(No symbol) [0x00007FF6BED2F0CF]
+	(No symbol) [0x00007FF6BED07133]
+	(No symbol) [0x00007FF6BECD04D1]
+	(No symbol) [0x00007FF6BECD1263]
+	GetHandleVerifier [0x00007FF6BF18A8ED+2962317]
+	GetHandleVerifier [0x00007FF6BF184EC2+2939234]
+	GetHandleVerifier [0x00007FF6BF1A2FF3+3062419]
+	GetHandleVerifier [0x00007FF6BEEE4B9A+185914]
+	GetHandleVerifier [0x00007FF6BEEEC78F+217647]
+	GetHandleVerifier [0x00007FF6BEED2A44+111844]
+	GetHandleVerifier [0x00007FF6BEED2BF2+112274]
+	GetHandleVerifier [0x00007FF6BEEB8A79+5401]
+	BaseThreadInitThunk [0x00007FF80DD1E8D7+23]
+	RtlUserThreadStart [0x00007FF80EA9BF6C+44]
+
+2025-05-05 12:12:10.412 | INFO     | __main__:fetch_proxies:59 - Открываю https://free-proxy-list.net/
+2025-05-05 12:12:11.036 | INFO     | __main__:fetch_proxies:63 - Ожидаем загрузку таблицы...
+2025-05-05 12:12:41.510 | ERROR    | __main__:fetch_proxies:80 - ❌ Ошибка при сборе прокси: Message: 
+Stacktrace:
+	GetHandleVerifier [0x00007FF6BEECA145+76773]
+	GetHandleVerifier [0x00007FF6BEECA1A0+76864]
+	(No symbol) [0x00007FF6BEC88F7A]
+	(No symbol) [0x00007FF6BECDF496]
+	(No symbol) [0x00007FF6BECDF74C]
+	(No symbol) [0x00007FF6BED32287]
+	(No symbol) [0x00007FF6BED0739F]
+	(No symbol) [0x00007FF6BED2F0CF]
+	(No symbol) [0x00007FF6BED07133]
+	(No symbol) [0x00007FF6BECD04D1]
+	(No symbol) [0x00007FF6BECD1263]
+	GetHandleVerifier [0x00007FF6BF18A8ED+2962317]
+	GetHandleVerifier [0x00007FF6BF184EC2+2939234]
+	GetHandleVerifier [0x00007FF6BF1A2FF3+3062419]
+	GetHandleVerifier [0x00007FF6BEEE4B9A+185914]
+	GetHandleVerifier [0x00007FF6BEEEC78F+217647]
+	GetHandleVerifier [0x00007FF6BEED2A44+111844]
+	GetHandleVerifier [0x00007FF6BEED2BF2+112274]
+	GetHandleVerifier [0x00007FF6BEEB8A79+5401]
+	BaseThreadInitThunk [0x00007FF80DD1E8D7+23]
+	RtlUserThreadStart [0x00007FF80EA9BF6C+44]
+
+Traceback (most recent call last):
+
+  File "C:\Users\wangr\PycharmProjects\pythonProject64\honest_reviews\app\get_proxy\proxy_scraper.py", line 83, in <module>
+    fetch_proxies()
+    └ <function fetch_proxies at 0x0000014F75C2DF80>
+
+> File "C:\Users\wangr\PycharmProjects\pythonProject64\honest_reviews\app\get_proxy\proxy_scraper.py", line 64, in fetch_proxies
+    WebDriverWait(driver, 30).until(
+    │             └ <selenium.webdriver.chrome.webdriver.WebDriver (session="6adfc6be29d3093f734b41a300d18fea")>
+    └ <class 'selenium.webdriver.support.wait.WebDriverWait'>
+
+  File "C:\Users\wangr\PycharmProjects\pythonProject64\venv\Lib\site-packages\selenium\webdriver\support\wait.py", line 146, in until
+    raise TimeoutException(message, screen, stacktrace)
+          │                │        │       └ ['\tGetHandleVerifier [0x00007FF6BEECA145+76773]', '\tGetHandleVerifier [0x00007FF6BEECA1A0+76864]', '\t(No symbol) [0x00007F...
+          │                │        └ None
+          │                └ ''
+          └ <class 'selenium.common.exceptions.TimeoutException'>
+
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+	GetHandleVerifier [0x00007FF6BEECA145+76773]
+	GetHandleVerifier [0x00007FF6BEECA1A0+76864]
+	(No symbol) [0x00007FF6BEC88F7A]
+	(No symbol) [0x00007FF6BECDF496]
+	(No symbol) [0x00007FF6BECDF74C]
+	(No symbol) [0x00007FF6BED32287]
+	(No symbol) [0x00007FF6BED0739F]
+	(No symbol) [0x00007FF6BED2F0CF]
+	(No symbol) [0x00007FF6BED07133]
+	(No symbol) [0x00007FF6BECD04D1]
+	(No symbol) [0x00007FF6BECD1263]
+	GetHandleVerifier [0x00007FF6BF18A8ED+2962317]
+	GetHandleVerifier [0x00007FF6BF184EC2+2939234]
+	GetHandleVerifier [0x00007FF6BF1A2FF3+3062419]
+	GetHandleVerifier [0x00007FF6BEEE4B9A+185914]
+	GetHandleVerifier [0x00007FF6BEEEC78F+217647]
+	GetHandleVerifier [0x00007FF6BEED2A44+111844]
+	GetHandleVerifier [0x00007FF6BEED2BF2+112274]
+	GetHandleVerifier [0x00007FF6BEEB8A79+5401]
+	BaseThreadInitThunk [0x00007FF80DD1E8D7+23]
+	RtlUserThreadStart [0x00007FF80EA9BF6C+44]
+
+2025-05-05 12:20:59.447 | INFO     | __main__:fetch_proxies:74 - Открываю https://spys.one/free-proxy-list/RU/
+2025-05-05 12:21:07.552 | ERROR    | __main__:parse_proxies:57 - Ошибка парсинга HTML: 'NoneType' object has no attribute 'find_all'
+Traceback (most recent call last):
+
+  File "C:\Users\wangr\PycharmProjects\pythonProject64\honest_reviews\app\get_proxy\proxy_scraper.py", line 94, in <module>
+    fetch_proxies()
+    └ <function fetch_proxies at 0x0000022D3E412700>
+
+  File "C:\Users\wangr\PycharmProjects\pythonProject64\honest_reviews\app\get_proxy\proxy_scraper.py", line 84, in fetch_proxies
+    proxies = parse_proxies(html)
+              │             └ '<html dir="ltr" lang="en"><head>\n<title>Free Russia proxy servers. Russian proxy - RU. </title>\n<meta name="keywords" cont...
+              └ <function parse_proxies at 0x0000022D3E3E36A0>
+
+> File "C:\Users\wangr\PycharmProjects\pythonProject64\honest_reviews\app\get_proxy\proxy_scraper.py", line 45, in parse_proxies
+    rows = table.find_all("tr")[3:]
+           └ None
+
+AttributeError: 'NoneType' object has no attribute 'find_all'
+2025-05-05 12:21:07.556 | SUCCESS  | __main__:fetch_proxies:88 - ✅ Найдено и сохранено 0 прокси в proxies.txt
+2025-05-05 12:24:42.047 | INFO     | __main__:fetch_proxies:95 - Открываю https://spys.one/free-proxy-list/RU/
+2025-05-05 12:24:49.405 | ERROR    | __main__:parse_proxies_from_file:62 - Ошибка при парсинге HTML из файла: 'NoneType' object has no attribute 'find_all'
+Traceback (most recent call last):
+
+  File "C:\Users\wangr\PycharmProjects\pythonProject64\honest_reviews\app\get_proxy\proxy_scraper.py", line 117, in <module>
+    fetch_proxies()
+    └ <function fetch_proxies at 0x000002674C95A840>
+
+  File "C:\Users\wangr\PycharmProjects\pythonProject64\honest_reviews\app\get_proxy\proxy_scraper.py", line 106, in fetch_proxies
+    proxies = parse_proxies_from_file("debug.html")
+              └ <function parse_proxies_from_file at 0x000002674C92B740>
+
+> File "C:\Users\wangr\PycharmProjects\pythonProject64\honest_reviews\app\get_proxy\proxy_scraper.py", line 50, in parse_proxies_from_file
+    rows = table.find_all("tr")[3:]
+           └ None
+
+AttributeError: 'NoneType' object has no attribute 'find_all'
+2025-05-05 12:24:49.407 | WARNING  | __main__:fetch_proxies:111 - ❌ Прокси не найдены!
+2025-05-05 12:34:19.471 | INFO     | __main__:fetch_proxies:104 - Открываю https://spys.one/free-proxy-list/RU/
+2025-05-05 12:34:27.663 | DEBUG    | __main__:parse_proxies_from_file:51 - HTML content of the page:
+<html dir="ltr" lang="en"><head>
+<title>Free Russia proxy servers. Russian proxy - RU. </title>
+<meta name="keywords" content="Russia proxies, RU proxy ">
+<meta name="description" content="Free open proxy servers list - country: RU - Russia. Russian proxy list. ">
+<meta name="resourse-type" content="document">
+<meta name="document-state" content="dynamic">
+<meta http-equiv="Content-Type" content="text/html; Charset=UTF-8">
+<meta http-equiv="Content-language" content="en">
+<meta http-equiv="Cache
+2025-05-05 12:34:27.667 | SUCCESS  | __main__:save_proxies:97 - ✅ Прокси сохранены в файл proxies.txt
+2025-05-05 13:09:29.834 | INFO     | __main__:fetch_proxies:105 - Открываю https://spys.one/free-proxy-list/RU/
+2025-05-05 13:09:35.901 | ERROR    | __main__:fetch_proxies:140 - ❌ Ошибка при сборе прокси: name 'WebDriverWait' is not defined
+Traceback (most recent call last):
+
+  File "C:\Users\wangr\PycharmProjects\pythonProject64\honest_reviews\app\get_proxy\proxy_scraper.py", line 143, in <module>
+    fetch_proxies()
+    └ <function fetch_proxies at 0x000002345377A7A0>
+
+> File "C:\Users\wangr\PycharmProjects\pythonProject64\honest_reviews\app\get_proxy\proxy_scraper.py", line 113, in fetch_proxies
+    select_element = WebDriverWait(driver, 10).until(
+                                   └ <selenium.webdriver.chrome.webdriver.WebDriver (session="2ed050e7e2e2a85367ea0cfeeea13f18")>
+
+NameError: name 'WebDriverWait' is not defined
+2025-05-05 13:11:21.108 | INFO     | __main__:fetch_proxies:107 - Открываю https://spys.one/free-proxy-list/RU/
+2025-05-05 13:11:23.620 | INFO     | __main__:fetch_proxies:117 - Выбрано отображение 500 прокси, жду обновления страницы...
+2025-05-05 13:11:31.943 | INFO     | __main__:fetch_proxies:125 - HTML сохранён. Начинаю парсинг...
+2025-05-05 13:11:33.297 | DEBUG    | __main__:parse_proxies_from_file:54 - HTML content of the page:
+<html dir="ltr" lang="en"><head>
+<title>Free Russia proxy servers. Russian proxy - RU. </title>
+<meta name="keywords" content="Russia proxies, RU proxy ">
+<meta name="description" content="Free open proxy servers list - country: RU - Russia. Russian proxy list. ">
+<meta name="resourse-type" content="document">
+<meta name="document-state" content="dynamic">
+<meta http-equiv="Content-Type" content="text/html; Charset=UTF-8">
+<meta http-equiv="Content-language" content="en">
+<meta http-equiv="Cache
+2025-05-05 13:11:33.335 | SUCCESS  | __main__:save_proxies:100 - ✅ Прокси сохранены в файл proxies.txt
+2025-05-05 13:11:33.336 | SUCCESS  | __main__:fetch_proxies:132 - ✅ Найдено и сохранено 250 прокси
+2025-05-05 13:13:37.920 | INFO     | __main__:fetch_proxies:107 - Открываю https://spys.one/free-proxy-list/RU/
+2025-05-05 13:13:42.155 | INFO     | __main__:fetch_proxies:117 - Выбрано отображение 500 прокси, жду обновления страницы...
+2025-05-05 13:13:56.440 | INFO     | __main__:fetch_proxies:126 - HTML сохранён. Начинаю парсинг...
+2025-05-05 13:13:57.970 | DEBUG    | __main__:parse_proxies_from_file:54 - HTML content of the page:
+<html dir="ltr" lang="en"><head>
+<title>Free Russia proxy servers. Russian proxy - RU. </title>
+<meta name="keywords" content="Russia proxies, RU proxy ">
+<meta name="description" content="Free open proxy servers list - country: RU - Russia. Russian proxy list. ">
+<meta name="resourse-type" content="document">
+<meta name="document-state" content="dynamic">
+<meta http-equiv="Content-Type" content="text/html; Charset=UTF-8">
+<meta http-equiv="Content-language" content="en">
+<meta http-equiv="Cache
+2025-05-05 13:13:58.012 | SUCCESS  | __main__:save_proxies:100 - ✅ Прокси сохранены в файл proxies.txt
+2025-05-05 13:13:58.012 | SUCCESS  | __main__:fetch_proxies:133 - ✅ Найдено и сохранено 250 прокси

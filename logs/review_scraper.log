@@ -1,0 +1,50 @@
+2025-05-05 18:00:56.220 | ERROR    | __main__:<module>:18 - Критическая ошибка: 'Paths'
+2025-05-05 18:03:31.144 | ERROR    | __main__:<module>:18 - Критическая ошибка: 'Paths'
+2025-05-05 18:04:46.546 | ERROR    | __main__:<module>:18 - Критическая ошибка: 'Paths'
+2025-05-05 18:07:13.840 | DEBUG    | honest_reviews.config.config_loader:load_config:30 - Загруженная конфигурация: Config(chromedriver_path='C:\\Users\\wangr\\.wdm\\drivers\\chromedriver\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe', proxy_list_file='C:\\Users\\wangr\\PycharmProjects\\pythonProject64\\honest_reviews\\app\\get_proxy\\proxies.txt', debug_html='debug_yandex.html', yandex_reviews_url='https://yandex.ru/maps/org/{org_id}/reviews/', proxy_username='wanga1712', proxy_password='hfSRxrAMu7K2ZGH')
+2025-05-05 18:07:13.840 | INFO     | honest_reviews.app.secondary_functions.proxy_manager:_load_proxies:24 - Загружено 1 валидных прокси
+2025-05-05 18:07:14.305 | ERROR    | honest_reviews.app.scrapping.yandex_reviews_parser:parse_reviews:22 - Не найдено рабочих прокси
+2025-05-05 18:07:14.305 | ERROR    | __main__:<module>:16 - Не удалось получить данные
+2025-05-06 09:55:50.408 | DEBUG    | honest_reviews.config.config_loader:load_config:30 - Загруженная конфигурация: Config(chromedriver_path='C:\\Users\\wangr\\.wdm\\drivers\\chromedriver\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe', proxy_list_file='C:\\Users\\wangr\\PycharmProjects\\pythonProject64\\honest_reviews\\app\\get_proxy\\proxies.txt', debug_html='debug_yandex.html', yandex_reviews_url='https://yandex.ru/maps/org/{org_id}/reviews/', proxy_username='wanga1712', proxy_password='hfSRxrAMu7K2ZGH')
+2025-05-06 09:56:02.906 | INFO     | honest_reviews.app.secondary_functions.proxy_manager:_load_proxies:37 - Загружено 1 валидных прокси
+2025-05-06 09:56:39.417 | ERROR    | honest_reviews.app.scrapping.yandex_reviews_parser:parse_reviews:22 - Не найдено рабочих прокси
+2025-05-06 10:04:50.198 | ERROR    | __main__:<module>:25 - Критическая ошибка: 'Paths'
+2025-05-06 10:05:50.543 | DEBUG    | honest_reviews.config.config_loader:load_config:30 - Загруженная конфигурация: Config(chromedriver_path='C:\\Users\\wangr\\.wdm\\drivers\\chromedriver\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe', proxy_list_file='C:\\Users\\wangr\\PycharmProjects\\pythonProject64\\honest_reviews\\app\\get_proxy\\proxies.txt', debug_html='debug_yandex.html', yandex_reviews_url='https://yandex.ru/maps/org/{org_id}/reviews/', proxy_username='wanga1712', proxy_password='hfSRxrAMu7K2ZGH')
+2025-05-06 10:05:50.544 | INFO     | honest_reviews.app.secondary_functions.proxy_manager:_load_proxies:19 - Загружено 1 прокси
+2025-05-06 10:05:51.325 | INFO     | __main__:<module>:15 - Используется прокси: us-ca.proxymesh.com:31280
+2025-05-06 10:05:51.325 | ERROR    | __main__:<module>:26 - Критическая ошибка: YandexReviewsParser.__init__() takes 2 positional arguments but 3 were given
+2025-05-06 10:07:33.415 | DEBUG    | honest_reviews.config.config_loader:load_config:30 - Загруженная конфигурация: Config(chromedriver_path='C:\\Users\\wangr\\.wdm\\drivers\\chromedriver\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe', proxy_list_file='C:\\Users\\wangr\\PycharmProjects\\pythonProject64\\honest_reviews\\app\\get_proxy\\proxies.txt', debug_html='debug_yandex.html', yandex_reviews_url='https://yandex.ru/maps/org/{org_id}/reviews/', proxy_username='wanga1712', proxy_password='hfSRxrAMu7K2ZGH')
+2025-05-06 10:07:33.415 | INFO     | honest_reviews.app.secondary_functions.proxy_manager:_load_proxies:19 - Загружено 1 прокси
+2025-05-06 10:07:33.956 | INFO     | __main__:<module>:15 - Используется прокси: us-ca.proxymesh.com:31280
+2025-05-06 10:07:33.956 | INFO     | honest_reviews.app.secondary_functions.proxy_manager:_load_proxies:19 - Загружено 1 прокси
+2025-05-06 10:07:36.704 | ERROR    | honest_reviews.app.scrapping.yandex_reviews_parser:parse_reviews:57 - Ошибка при парсинге: 'builtin_function_or_method' object has no attribute 'uniform'...
+2025-05-06 10:07:38.829 | ERROR    | __main__:<module>:24 - Не удалось получить данные
+2025-05-06 10:09:35.253 | DEBUG    | honest_reviews.config.config_loader:load_config:30 - Загруженная конфигурация: Config(chromedriver_path='C:\\Users\\wangr\\.wdm\\drivers\\chromedriver\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe', proxy_list_file='C:\\Users\\wangr\\PycharmProjects\\pythonProject64\\honest_reviews\\app\\get_proxy\\proxies.txt', debug_html='debug_yandex.html', yandex_reviews_url='https://yandex.ru/maps/org/{org_id}/reviews/', proxy_username='wanga1712', proxy_password='hfSRxrAMu7K2ZGH')
+2025-05-06 10:09:35.254 | INFO     | honest_reviews.app.secondary_functions.proxy_manager:_load_proxies:19 - Загружено 1 прокси
+2025-05-06 10:09:35.786 | INFO     | __main__:<module>:15 - Используется прокси: us-ca.proxymesh.com:31280
+2025-05-06 10:09:35.787 | INFO     | honest_reviews.app.secondary_functions.proxy_manager:_load_proxies:19 - Загружено 1 прокси
+2025-05-06 10:09:47.438 | WARNING  | honest_reviews.app.scrapping.yandex_reviews_parser:parse_reviews:44 - Блок отзывов не найден: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=136.0.7103.48)
+Stacktrace:
+	GetHandleVerifier [0x00007FF67CEEA145+76773]
+	GetHandleVerifier [0x00007FF67CEEA1A0+76864]
+	(No symbol) [0x00007FF67CCA8F7A]
+	(No symbol) [0x00007FF67CC81B31]
+	(No symbol) [0x00007FF67CD2EA8E]
+	(No symbol) [0x00007FF67CD4E9C2]
+	(No symbol) [0x00007FF67CD27133]
+	(No symbol) [0x00007FF67CCF04D1]
+	(No symbol) [0x00007FF67CCF1263]
+	GetHandleVerifier [0x00007FF67D1AA8ED+2962317]
+	GetHandleVerifier [0x00007FF67D1A4EC2+2939234]
+	GetHandleVerifier [0x00007FF67D1C2FF3+3062419]
+	GetHandleVerifier [0x00007FF67CF04B9A+185914]
+	GetHandleVerifier [0x00007FF67CF0C78F+217647]
+	GetHandleVerifier [0x00007FF67CEF2A44+111844]
+	GetHandleVerifier [0x00007FF67CEF2BF2+112274]
+	GetHandleVerifier [0x00007FF67CED8A79+5401]
+	BaseThreadInitThunk [0x00007FF80DD1E8D7+23]
+	RtlUserThreadStart [0x00007FF80EA9BF6C+44]
+
+2025-05-06 10:09:49.479 | ERROR    | __main__:<module>:24 - Не удалось получить данные

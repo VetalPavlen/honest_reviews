@@ -1,0 +1,15 @@
+[path]
+# Путь к chromedriver
+CHROMEDRIVER_PATH = C:\path\to\chromedriver.exe
+# Путь к файлу с прокси
+PROXY_LIST_FILE = os.getenv("PROXY_LIST_FILE", r"C:\path\to\proxies.txt")
+
+# Путь к дебаг-HTML файлу
+DEBUG_HTML = "debug_yandex.html"
+
+# URL для получения отзывов
+YANDEX_URL = "https://yandex.ru/maps/org/{org_id}/reviews/"
+
+# Учетные данные для прокси
+PROXY_USER = os.getenv("PROXY_USER", "username")
+PROXY_PASS = os.getenv("PROXY_PASS", "password")

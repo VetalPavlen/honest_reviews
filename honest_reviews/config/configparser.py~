@@ -1,0 +1,18 @@
+# config.py
+import configparser
+import os
+
+config = configparser.ConfigParser()
+config.read(os.path.join(os.path.dirname(__file__), 'config.ini'))
+
+# Пути
+CHROMEDRIVER_PATH = config.get('Paths', 'chromedriver_path')
+PROXY_LIST_FILE = config.get('Paths', 'proxy_list_file')
+DEBUG_HTML = config.get('Paths', 'debug_html')
+
+# URL
+YANDEX_URL = config.get('URLs', 'yandex_reviews_url')
+
+# Прокси авторизация
+PROXY_USER = config.get('ProxyAuth', 'username')
+PROXY_PASS = config.get('ProxyAuth', 'password')

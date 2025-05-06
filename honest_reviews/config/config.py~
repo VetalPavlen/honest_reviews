@@ -1,0 +1,28 @@
+# config.py
+import configparser
+import os
+
+config = configparser.ConfigParser()
+config_path = os.path.join(os.path.dirname(__file__), 'config.ini')
+config.read(config_path)
+
+# Пути
+CHROMEDRIVER_PATH = config.get('Paths', 'chromedriver_path')
+PROXY_LIST_FILE = config.get('Paths', 'proxy_list_file')
+DEBUG_HTML = config.get('Paths', 'debug_html')
+
+# URL
+YANDEX_URL = config.get('URLs', 'yandex_reviews_url')
+
+# Прокси авторизация
+PROXY_USER = config.get('ProxyAuth', 'username')
+PROXY_PASS = config.get('ProxyAuth', 'password')
+
+# # ✅ Выводим в консоль
+# print("Загружен config.ini из:", config_path)
+# print("CHROMEDRIVER_PATH:", CHROMEDRIVER_PATH)
+# print("PROXY_LIST_FILE:", PROXY_LIST_FILE)
+# print("DEBUG_HTML:", DEBUG_HTML)
+# print("YANDEX_URL:", YANDEX_URL)
+# print("PROXY_USER:", PROXY_USER)
+# print("PROXY_PASS:", PROXY_PASS)
