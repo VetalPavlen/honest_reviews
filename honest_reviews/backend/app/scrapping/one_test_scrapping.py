@@ -1,9 +1,9 @@
 # Основной парсер Яндекса
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from honest_reviews.config.config_loader import CHROMEDRIVER_PATH, YANDEX_URL
-from honest_reviews.app.secondary_functions.proxy_manager import ProxyManager
-from honest_reviews.app.secondary_functions.behavior_simulation import UserBehavior
+from honest_reviews.backend.config.config_loader import CHROMEDRIVER_PATH, YANDEX_URL
+from honest_reviews.backend.app.secondary_functions.proxy_manager import ProxyManager
+from honest_reviews.backend.app import UserBehavior
 import time
 import random
 import logging

@@ -5,7 +5,7 @@ import requests
 from requests.auth import HTTPProxyAuth
 from loguru import logger
 from typing import List, Optional
-from honest_reviews.config.config_loader import Config
+from honest_reviews.backend.config.config_loader import Config
 
 class ProxyManager:
     def __init__(self, config: Config):

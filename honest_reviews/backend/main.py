@@ -1,14 +1,14 @@
-from honest_reviews.app.scrapping.yandex_reviews_parser import YandexReviewsParser
-from honest_reviews.app.secondary_functions.proxy_manager import ProxyManager
+from honest_reviews.backend.app.scrapping.yandex_reviews_parser import YandexReviewsParser
+from honest_reviews.backend.app.secondary_functions.proxy_manager import ProxyManager
 from loguru import logger
 
-from honest_reviews.config.config_loader import ConfigLoader
+from honest_reviews.backend.config.config_loader import ConfigLoader
 
 if __name__ == "__main__":
     logger.add("logs/review_scraper.log", rotation="1 MB", level="DEBUG")
 
     try:
-        config = ConfigLoader.load_config("honest_reviews/config/config.ini")
+        config = ConfigLoader.load_config("config/config.ini")
         proxy_manager = ProxyManager(config)
         proxy = proxy_manager.get_random_proxy()
         if proxy:

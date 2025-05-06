@@ -5,9 +5,9 @@ from selenium.webdriver.common.by import By
 import time
 import random
 from loguru import logger
-from honest_reviews.app.secondary_functions.human_interaction import HumanInteraction
-from honest_reviews.app.secondary_functions.proxy_manager import ProxyManager
-from honest_reviews.app.secondary_functions.browser_manager import BrowserManager
+from honest_reviews.backend.app.secondary_functions.human_interaction import HumanInteraction
+from honest_reviews.backend.app.secondary_functions.proxy_manager import ProxyManager
+from honest_reviews.backend.app.secondary_functions.browser_manager import BrowserManager
 
 
 class YandexReviewsParser:
