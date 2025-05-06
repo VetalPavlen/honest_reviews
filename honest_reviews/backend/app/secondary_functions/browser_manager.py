@@ -4,6 +4,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from loguru import logger
+import zipfile
+import tempfile
 
 
 class BrowserManager:
@@ -48,8 +50,66 @@ class BrowserManager:
 
     def _create_proxy_auth_extension(self, proxy_host: str, proxy_port: str,
                                      proxy_user: str, proxy_pass: str) -> str:
-        # Создание расширения для аутентификации прокси (как в вашем коде)
-        pass
+        """Создание расширения для аутентификации прокси"""
+        manifest_json = """
+        {
+            "version": "1.0.0",
+            "manifest_version": 2,
+            "name": "Chrome Proxy",
+            "permissions": [
+                "proxy",
+                "tabs",
+                "unlimitedStorage",
+                "storage",
+                "<all_urls>",
+                "webRequest",
+                "webRequestBlocking"
+            ],
+            "background": {
+                "scripts": ["background.js"]
+            },
+            "minimum_chrome_version":"22.0.0"
+        }
+        """
+
+        background_js = f"""
+        var config = {{
+            mode: "fixed_servers",
+            rules: {{
+                singleProxy: {{
+                    scheme: "http",
+                    host: "{proxy_host}",
+                    port: parseInt({proxy_port})
+                }},
+                bypassList: ["localhost"]
+            }}
+        }};
+
+        chrome.proxy.settings.set({{value: config, scope: "regular"}}, function() {{}});
+
+        function callbackFn(details) {{
+            return {{
+                authCredentials: {{
+                    username: "{proxy_user}",
+                    password: "{proxy_pass}"
+                }}
+            }};
+        }}
+
+        chrome.webRequest.onAuthRequired.addListener(
+            callbackFn,
+            {{urls: ["<all_urls>"]}},
+            ['blocking']
+        );
+        """
+
+        # Создание временного файла для расширения
+        pluginfile = tempfile.NamedTemporaryFile(suffix='.zip', delete=False)
+        with zipfile.ZipFile(pluginfile.name, 'w') as zp:
+            zp.writestr("manifest.json", manifest_json)
+            zp.writestr("background.js", background_js)
+
+        return pluginfile.name
 
     def _hide_automation(self, driver: webdriver.Chrome):
         driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
