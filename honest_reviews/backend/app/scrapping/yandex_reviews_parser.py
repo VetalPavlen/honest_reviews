@@ -125,18 +125,18 @@ class YandexReviewsParser:
     def _process_reviews_page(self, driver: Chrome) -> bool:
         """Обработка страницы с отзывами"""
         # Имитация человеческого поведения перед проверкой
-        HumanInteraction.simulate_random_interaction(driver)
+        # HumanInteraction.simulate_random_interaction(driver)
 
         if not self._wait_for_reviews_block(driver):
             return False
 
         # Основное взаимодействие с отзывами
-        HumanInteraction.simulate_reading(driver, max_reviews=5)
-        HumanInteraction.smart_scroll(driver)
+        # HumanInteraction.simulate_reading(driver, max_reviews=5)
+        HumanInteraction.load_all_reviews(driver)
 
-        # Дополнительные случайные действия
-        if random.random() > 0.3:
-            HumanInteraction.simulate_random_interaction(driver)
+        # # Дополнительные случайные действия
+        # if random.random() > 0.3:
+        #     HumanInteraction.simulate_random_interaction(driver)
 
         return True
 
