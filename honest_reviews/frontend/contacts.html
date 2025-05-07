@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты - Честный отзыв</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #051937, #062254, #0a2d70);
+            color: white;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #051937, #062254, #0a2d70);
+        }
+
+        .accent-blue {
+            color: #39a0ff;
+        }
+
+        .accent-bg {
+            background-color: #39a0ff;
+        }
+
+        .slant-top {
+            clip-path: polygon(0 0, 100% 7%, 100% 100%, 0% 100%);
+            margin-top: -70px;
+            padding-top: 100px;
+        }
+
+        .slant-bottom {
+            clip-path: polygon(0 0, 100% 0, 100% 93%, 0% 100%);
+            padding-bottom: 70px;
+        }
+
+        .btn-primary {
+            background-color: #39a0ff;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+            .btn-primary:hover {
+                background-color: #2d7fd6;
+                transform: translateY(-3px);
+                box-shadow: 0 10px 20px rgba(3, 27, 78, 0.3);
+            }
+
+        .card {
+            background: rgba(6, 34, 84, 0.6);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(2, 9, 27, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(57, 160, 255, 0.2);
+            transition: all 0.3s;
+        }
+
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 35px rgba(2, 9, 27, 0.3);
+            }
+
+        .form-input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(57, 160, 255, 0.3);
+            border-radius: 8px;
+            color: white;
+            padding: 12px 16px;
+            width: 100%;
+            transition: all 0.3s;
+        }
+
+            .form-input:focus {
+                outline: none;
+                background: rgba(255, 255, 255, 0.15);
+                border: 1px solid #39a0ff;
+                box-shadow: 0 0 0 3px rgba(57, 160, 255, 0.25);
+            }
+
+            .form-input::placeholder {
+                color: rgba(255, 255, 255, 0.5);
+            }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(6, 34, 84, 0.6);
+            color: #39a0ff;
+            margin: 0 8px;
+            font-size: 20px;
+            transition: all 0.3s;
+        }
+
+            .social-icon:hover {
+                background: #39a0ff;
+                color: white;
+                transform: translateY(-5px);
+            }
+
+        .contact-info i {
+            color: #39a0ff;
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        #nav-toggle:checked + label + #nav-links {
+            display: flex;
+        }
+
+        /* Анимации */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .animate-delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .animate-delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .animate-delay-3 {
+            animation-delay: 0.6s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <header class="gradient-bg py-4 px-6 sm:px-10 fixed w-full top-0 z-50">
+        <nav class="flex flex-wrap justify-between items-center max-w-7xl mx-auto">
+            <div class="flex items-center">
+                <a href="index.html" class="flex items-center">
+                    <img src="https://page.genspark.site/v1/base64_upload/bd9256ebf16b58a0aa025819f1155b9d" alt="Честный отзыв" class="h-10 mr-3">
+                    <span class="text-white font-bold text-xl">Честный отзыв</span>
+                </a>
+            </div>
+
+            <input type="checkbox" id="nav-toggle" class="hidden">
+            <label for="nav-toggle" class="lg:hidden flex items-center cursor-pointer">
+                <i class="fas fa-bars text-white text-2xl"></i>
+            </label>
+
+            <div id="nav-links" class="hidden lg:flex flex-col lg:flex-row w-full lg:w-auto mt-4 lg:mt-0">
+                <a href="index.html" class="px-4 py-2 text-white hover:text-blue-300 transition-colors">Главная</a>
+                <a href="about.html" class="px-4 py-2 text-white hover:text-blue-300 transition-colors">О сервисе</a>
+                <a href="pricing.html" class="px-4 py-2 text-white hover:text-blue-300 transition-colors">Тарифы</a>
+                <a href="faq.html" class="px-4 py-2 text-white hover:text-blue-300 transition-colors">FAQ</a>
+                <a href="contacts.html" class="px-4 py-2 text-white font-medium border-b-2 border-blue-400">Контакты</a>
+                <div class="lg:ml-8 mt-4 lg:mt-0 flex flex-col sm:flex-row">
+                    <a href="login.html" class="btn-primary mb-3 sm:mb-0 sm:mr-3 text-center">Войти</a>
+                    <a href="register.html" class="btn-primary text-center">Регистрация</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Заголовок страницы -->
+    <section class="gradient-bg pt-36 pb-24 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 sm:px-10 relative z-10">
+            <h1 class="text-4xl sm:text-5xl font-bold mb-6 animate-fade-in">
+                Наши <span class="accent-blue">контакты</span>
+            </h1>
+            <p class="text-lg max-w-2xl opacity-90 mb-8 animate-fade-in animate-delay-1">
+                Есть вопросы или предложения? Свяжитесь с нами любым удобным способом — мы всегда рады помочь!
+            </p>
+        </div>
+
+        <!-- Декоративные элементы -->
+        <div class="absolute top-20 right-0 w-96 h-96 bg-blue-400 rounded-full filter blur-3xl opacity-10"></div>
+        <div class="absolute top-10 left-10 w-32 h-32 bg-blue-300 rounded-full filter blur-2xl opacity-10"></div>
+    </section>
+
+    <!-- Карточки контактов -->
+    <section class="bg-white slant-top slant-bottom py-20 relative">
+        <div class="max-w-7xl mx-auto px-6 sm:px-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Контактная информация -->
+                <div class="card p-8 text-white animate-fade-in">
+                    <h3 class="text-2xl font-bold mb-6 accent-blue">Контактная информация</h3>
+                    <div class="contact-info space-y-6">
+                        <div class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1"></i>
+                            <div>
+                                <h4 class="font-medium">Адрес</h4>
+                                <p class="opacity-80 mt-1">Москва, ул. Цифровая, 42<br>БЦ "Технопарк", офис 315</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <i class="fas fa-phone mt-1"></i>
+                            <div>
+                                <h4 class="font-medium">Телефон</h4>
+                                <p class="opacity-80 mt-1">+7 (999) 123-45-67</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <i class="fas fa-envelope mt-1"></i>
+                            <div>
+                                <h4 class="font-medium">Email</h4>
+                                <p class="opacity-80 mt-1">info@honest-review.ru</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <i class="fas fa-clock mt-1"></i>
+                            <div>
+                                <h4 class="font-medium">Режим работы</h4>
+                                <p class="opacity-80 mt-1">Пн-Пт: 9:00 - 18:00<br>Сб-Вс: выходной</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="text-xl font-medium mt-10 mb-4 accent-blue">Мы в соцсетях</h4>
+                    <div class="flex flex-wrap">
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-vk"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fas fa-paper-plane"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Форма обратной связи -->
+                <div class="card p-8 text-white md:col-span-2 animate-fade-in animate-delay-1">
+                    <h3 class="text-2xl font-bold mb-6 accent-blue">Напишите нам</h3>
+                    <form action="#" method="POST" class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block mb-2 opacity-90">Ваше имя</label>
+                                <input type="text" id="name" name="name" class="form-input" placeholder="Иван Иванов" required>
+                            </div>
+                            <div>
+                                <label for="email" class="block mb-2 opacity-90">Ваш email</label>
+                                <input type="email" id="email" name="email" class="form-input" placeholder="ivan@example.com" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="subject" class="block mb-2 opacity-90">Тема</label>
+                            <input type="text" id="subject" name="subject" class="form-input" placeholder="Вопрос о сервисе" required>
+                        </div>
+                        <div>
+                            <label for="message" class="block mb-2 opacity-90">Сообщение</label>
+                            <textarea id="message" name="message" rows="5" class="form-input" placeholder="Напишите ваше сообщение здесь..." required></textarea>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="privacy" name="privacy" class="mr-2 accent-blue-500" required>
+                            <label for="privacy" class="text-sm opacity-90">Я согласен на обработку персональных данных</label>
+                        </div>
+                        <button type="submit" class="btn-primary">Отправить сообщение</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Карта -->
+            <div class="mt-12 card p-2 animate-fade-in animate-delay-2">
+                <h3 class="text-2xl font-bold mb-6 accent-blue p-4">Мы на карте</h3>
+                <div class="w-full h-96 rounded-lg overflow-hidden">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d35942.65904815113!2d37.595803367089844!3d55.74954700000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54a50b315e573%3A0xa886bf5a3d9b2e68!2z0JzQvtGB0LrQstCwLdCh0LjRgtC4!5e0!3m2!1sru!2sru!4v1691135065053!5m2!1sru!2sru"
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="gradient-bg py-20 relative">
+        <div class="max-w-7xl mx-auto px-6 sm:px-10">
+            <h2 class="text-3xl sm:text-4xl font-bold mb-12 text-center animate-fade-in">
+                Часто задаваемые <span class="accent-blue">вопросы</span>
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 animate-fade-in animate-delay-1">
+                <div class="card p-6">
+                    <h4 class="text-lg font-semibold mb-2">Как быстро готовится отчет?</h4>
+                    <p class="opacity-80">Базовый отчет формируется в течение 1-3 минут в зависимости от количества отзывов о компании. Расширенный отчет с подробным анализом готовится до 15 минут.</p>
+                </div>
+
+                <div class="card p-6">
+                    <h4 class="text-lg font-semibold mb-2">Какие способы оплаты вы принимаете?</h4>
+                    <p class="opacity-80">Мы принимаем оплату банковскими картами, через ЮMoney, Яндекс.Кассу и другие популярные платежные системы.</p>
+                </div>
+
+                <div class="card p-6">
+                    <h4 class="text-lg font-semibold mb-2">Как получить помощь в работе с сервисом?</h4>
+                    <p class="opacity-80">Вы можете связаться с нашей службой поддержки через форму обратной связи или по электронной почте support@honest-review.ru.</p>
+                </div>
+
+                <div class="card p-6">
+                    <h4 class="text-lg font-semibold mb-2">Есть ли у вас API для интеграции?</h4>
+                    <p class="opacity-80">Да, для корпоративных клиентов доступен API для интеграции с CRM-системами и корпоративными сайтами. Подробности можно узнать у менеджеров.</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-10 animate-fade-in animate-delay-2">
+                <a href="faq.html" class="btn-primary">Смотреть все вопросы</a>
+            </div>
+        </div>
+
+        <!-- Декоративные элементы -->
+        <div class="absolute bottom-20 left-0 w-80 h-80 bg-blue-400 rounded-full filter blur-3xl opacity-10"></div>
+        <div class="absolute top-40 right-10 w-40 h-40 bg-blue-300 rounded-full filter blur-2xl opacity-10"></div>
+    </section>
+
+    <!-- Подвал сайта -->
+    <footer class="gradient-bg pt-16 pb-8 relative">
+        <div class="max-w-7xl mx-auto px-6 sm:px-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <img src="https://page.genspark.site/v1/base64_upload/bd9256ebf16b58a0aa025819f1155b9d" alt="Честный отзыв" class="h-10 mr-3">
+                        <span class="text-white font-bold text-xl">Честный отзыв</span>
+                    </div>
+                    <p class="text-white opacity-70 mb-6">
+                        Сервис анализа достоверности отзывов с использованием искусственного интеллекта
+                    </p>
+                    <p class="text-white opacity-70 text-sm">
+                        Все оценки достоверности отзывов являются вероятностными и не являются установлением юридических фактов.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-6">Навигация</h4>
+                    <ul class="space-y-3 text-white opacity-70">
+                        <li><a href="index.html" class="hover:text-blue-300 transition-colors">Главная</a></li>
+                        <li><a href="about.html" class="hover:text-blue-300 transition-colors">О сервисе</a></li>
+                        <li><a href="pricing.html" class="hover:text-blue-300 transition-colors">Тарифы</a></li>
+                        <li><a href="faq.html" class="hover:text-blue-300 transition-colors">FAQ</a></li>
+                        <li><a href="contacts.html" class="hover:text-blue-300 transition-colors">Контакты</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-6">Правовая информация</h4>
+                    <ul class="space-y-3 text-white opacity-70">
+                        <li><a href="#" class="hover:text-blue-300 transition-colors">Пользовательское соглашение</a></li>
+                        <li><a href="#" class="hover:text-blue-300 transition-colors">Политика конфиденциальности</a></li>
+                        <li><a href="#" class="hover:text-blue-300 transition-colors">Обработка персональных данных</a></li>
+                        <li><a href="#" class="hover:text-blue-300 transition-colors">Файлы cookie</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-6">Контакты</h4>
+                    <ul class="space-y-3 text-white opacity-70">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-3 text-blue-400"></i>
+                            Москва, ул. Цифровая, 42
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone mr-3 text-blue-400"></i>
+                            +7 (999) 123-45-67
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-blue-400"></i>
+                            info@honest-review.ru
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-clock mr-3 text-blue-400"></i>
+                            Пн-Пт: 9:00 - 18:00
+                        </li>
+                    </ul>
+
+                    <div class="flex mt-6">
+                        <a href="#" class="social-icon mr-2">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="social-icon mr-2">
+                            <i class="fab fa-vk"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 pt-8 mt-12">
+                <div class="flex flex-col sm:flex-row justify-between items-center">
+                    <p class="text-white opacity-70 text-sm mb-4 sm:mb-0">
+                        © 2024 Честный отзыв. Все права защищены.
+                    </p>
+                    <p class="text-white opacity-70 text-sm">
+                        При использовании сайта вы принимаете условия использования файлов cookie
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript для анимации -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Мобильное меню
+            document.getElementById('nav-toggle').addEventListener('change', function() {
+                if (this.checked) {
+                    document.getElementById('nav-links').classList.add('flex');
+                    document.getElementById('nav-links').classList.remove('hidden');
+                } else {
+                    document.getElementById('nav-links').classList.add('hidden');
+                    document.getElementById('nav-links').classList.remove('flex');
+                }
+            });
+
+            // Анимация при скролле
+            const elements = document.querySelectorAll('.animate-fade-in');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            elements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.animationPlayState = 'paused';
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>

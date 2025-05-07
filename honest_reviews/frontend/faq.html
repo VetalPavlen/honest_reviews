@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Честный отзыв</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --dark-blue: #041e42;
+            --blue: #0046ad;
+            --light-blue: #0099ff;
+            --accent-blue: #00c3ff;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark-blue);
+            color: white;
+        }
+
+        .bg-dark-blue {
+            background-color: var(--dark-blue);
+        }
+
+        .bg-blue {
+            background-color: var(--blue);
+        }
+
+        .bg-light-blue {
+            background-color: var(--light-blue);
+        }
+
+        .bg-accent-blue {
+            background-color: var(--accent-blue);
+        }
+
+        .text-accent-blue {
+            color: var(--accent-blue);
+        }
+
+        .btn-blue {
+            background-color: var(--light-blue);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+            .btn-blue:hover {
+                background-color: var(--accent-blue);
+                transform: translateY(-2px);
+            }
+
+        .skewed-section {
+            position: relative;
+            padding: 4rem 0;
+            transform: skewY(-2deg);
+            margin-top: -2rem;
+            z-index: 1;
+        }
+
+            .skewed-section > div {
+                transform: skewY(2deg);
+            }
+
+        .skewed-section-reverse {
+            position: relative;
+            padding: 4rem 0;
+            transform: skewY(2deg);
+            margin-top: -2rem;
+            z-index: 1;
+        }
+
+            .skewed-section-reverse > div {
+                transform: skewY(-2deg);
+            }
+
+        .faq-item {
+            border-left: 3px solid var(--light-blue);
+            transition: all 0.3s ease;
+        }
+
+            .faq-item:hover {
+                border-left-color: var(--accent-blue);
+            }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+            .faq-answer.active {
+                max-height: 500px;
+            }
+
+        .accordion-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .rotate-icon {
+            transform: rotate(180deg);
+        }
+
+        .navbar {
+            backdrop-filter: blur(10px);
+            background-color: rgba(4, 30, 66, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar fixed top-0 w-full z-50 py-4">
+        <div class="container mx-auto px-4 md:px-6 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-3">
+                <img src="https://page.genspark.site/v1/base64_upload/bd9256ebf16b58a0aa025819f1155b9d" alt="Логотип Честный отзыв" class="h-10">
+                <span class="text-white font-bold text-xl">Честный отзыв</span>
+            </a>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="index.html" class="text-white hover:text-accent-blue transition">Главная</a>
+                <a href="about.html" class="text-white hover:text-accent-blue transition">О сервисе</a>
+                <a href="pricing.html" class="text-white hover:text-accent-blue transition">Тарифы</a>
+                <a href="faq.html" class="text-accent-blue font-medium">FAQ</a>
+                <a href="contacts.html" class="text-white hover:text-accent-blue transition">Контакты</a>
+                <a href="login.html" class="btn-blue px-4 py-2 rounded-md font-medium">Войти</a>
+            </div>
+            <button class="md:hidden text-white text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-28 pb-16 px-4 md:px-0">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Часто задаваемые вопросы</h1>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto">Ответы на популярные вопросы о сервисе "Честный отзыв" и особенностях его работы</p>
+        </div>
+    </section>
+
+    <!-- FAQ Categories -->
+    <section class="skewed-section bg-blue">
+        <div class="container mx-auto px-4 md:px-6 py-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
+                <a href="#general" class="bg-opacity-20 bg-white rounded-lg p-6 hover:bg-opacity-30 transition">
+                    <i class="fas fa-info-circle text-4xl text-accent-blue mb-4"></i>
+                    <h3 class="text-xl font-semibold">Общие вопросы</h3>
+                </a>
+                <a href="#service" class="bg-opacity-20 bg-white rounded-lg p-6 hover:bg-opacity-30 transition">
+                    <i class="fas fa-cogs text-4xl text-accent-blue mb-4"></i>
+                    <h3 class="text-xl font-semibold">О работе сервиса</h3>
+                </a>
+                <a href="#pricing" class="bg-opacity-20 bg-white rounded-lg p-6 hover:bg-opacity-30 transition">
+                    <i class="fas fa-tags text-4xl text-accent-blue mb-4"></i>
+                    <h3 class="text-xl font-semibold">Тарифы и оплата</h3>
+                </a>
+                <a href="#technical" class="bg-opacity-20 bg-white rounded-lg p-6 hover:bg-opacity-30 transition">
+                    <i class="fas fa-laptop-code text-4xl text-accent-blue mb-4"></i>
+                    <h3 class="text-xl font-semibold">Технические вопросы</h3>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- General Questions -->
+    <section id="general" class="py-16 px-4 md:px-0">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-12 text-center">Общие вопросы</h2>
+
+            <div class="max-w-3xl mx-auto space-y-6">
+                <div class="faq-item bg-opacity-10 bg-white rounded-lg p-6">
+                    <div class="faq-question flex justify-between items-center cursor-pointer">
+                        <h3 class="text-xl font-medium">Что такое "Честный отзыв"?</h3>
+                        <i class="fas fa-chevron-down accordion-icon text-accent-blue"></i>
+                    </div>
+                    <div class="faq-answer mt-4 text-gray-300">
+                        <p>"Честный отзыв" — это сервис для анализа достоверности отзывов о компаниях и товарах. Мы собираем отзывы с популярных платформ (Яндекс.Карты, 2ГИС, Отзовик, Google Maps), анализируем их и выявляем признаки возможной накрутки или фальсификации.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item bg-opacity-10 bg-white rounded-lg p-6">
+                    <div class="faq-question flex justify-between items-center cursor-pointer">
+                        <h3 class="text-xl font-medium">Как пользоваться сервисом?</h3>
+                        <i class="fas fa-chevron-down accordion-icon text-accent-blue"></i>
+                    </div>
+                    <div class="faq-answer mt-4 text-gray-300">
+                        <p>Использование сервиса максимально простое:</p>
+                        <ul class="list-disc pl-6 mt-2 space-y-2">
+                            <li>Введите название компании или ИНН в поисковое поле на главной странице</li>
+                            <li>Нажмите кнопку "Проверить отзывы"</li>
+                            <li>Просмотрите результаты анализа, включая индекс доверия, статистику и выявленные аномалии</li>
+                            <li>При необходимости скачайте подробный отчет в PDF-формате</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item bg-opacity-10 bg-white rounded-lg p-6">
+                    <div class="faq-question flex justify-between items-center cursor-pointer">
+                        <h3 class="text-xl font-medium">Насколько точны результаты анализа?</h3>
+                        <i class="fas fa-chevron-down accordion-icon text-accent-blue"></i>
+                    </div>
+                    <div class="faq-answer mt-4 text-gray-300">
+                        <p>Наш сервис использует комплексную методологию анализа, которая позволяет с высокой вероятностью выявлять подозрительные отзывы. Однако важно понимать, что все оценки достоверности являются вероятностными и не являются установлением юридических фактов.</p>
+                        <p class="mt-2">Точность анализа постоянно совершенствуется, и мы регулярно обновляем алгоритмы для повышения качества результатов.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item bg-opacity-10 bg-white rounded-lg p-6">
+                    <div class="faq-question flex justify-between items-center cursor-pointer">
+                        <h3 class="text-xl font-medium">Для кого предназначен сервис?</h3>
+                        <i class="fas fa-chevron-down accordion-icon text-accent-blue"></i>
+                    </div>
+                    <div class="faq-answer mt-4 text-gray-300">
+                        <p>Сервис "Честный отзыв" будет полезен:</p>
+                        <ul class="list-disc pl-6 mt-2 space-y-2">
+                            <li>Потребителям, которые хотят проверить достоверность отзывов перед покупкой или обращением в компанию</li>
+                            <li>Бизнесу для мониторинга своей репутации и выявления недобросовестных действий конкурентов</li>
+                            <li>Маркетологам для анализа отзывов о компаниях и товарах</li>
+                            <li>Исследователям рынка для оценки реальной репутации компаний</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Principles -->
+    <section id="service" class="skewed-section-reverse bg-blue py-16">
+        <div class="container mx-auto px-4 md:px-0">
+            <h2 class="text-3xl font-bold mb-12 text-center">О работе сервиса</h2>
+
+            <div class="max-w-3xl mx-auto space-y-6">
+                <div class="faq-item bg-opacity-15 bg-white rounded-lg p-6">
+                    <div class="faq-question flex justify-between items-center cursor-pointer">
+                        <h3 class="text-xl font-medium">Какие источники отзывов вы анализируете?</h3>
+                        <i class="fas fa-chevron-down accordion-icon text-accent-blue"></i>
+                    </div>
+                    <div class="faq-answer mt-4 text-gray-300">
+                        <p>Мы собираем и анализируем отзывы со следующих платформ:</p>
+                        <ul class="list-disc pl-6 mt-2 space-y-2">
+                            <li>Яндекс.Карты</li>
+                            <li>2ГИС</li>
+                            <li>Отзовик</li>
+                            <li>Google Maps</li>
+                        </ul>
+                        <p class="mt-2">В будущем планируется расширение списка источников и добавление специализированных отраслевых платформ.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item bg-opacity-15 bg-white rounded-lg p-6">
+                    <div class="faq-question flex justify-between items-center cursor-pointer">
+                        <h3 class="text-xl font-medium">Как определяется вероятность накрутки отзывов?</h3>
+                        <i class="fas fa-chevron-down accordion-icon text-accent-blue"></i>
+                    </div>
+                    <div class="faq-answer mt-4 text-gray-300">
+                        <p>Для определения вероятности накрутки мы анализируем несколько факторов:</p>
+                        <ul class="list-disc pl-6 mt-2 space-y-2">
+                            <li>Временные аномалии (большое количество отзывов за короткий период)</li>
+                            <li>Текстовые шаблоны и повторяющиеся фразы</li>
+                            <li>Профили авторов отзывов (новые аккаунты, аккаунты без истории)</li>
+                            <li>Несоответствие между оценкой и содержанием отзыва</li>
+                            <li>Статистические отклонения от нормального распределения оценок</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item bg-opacity-15 bg-white rounded-lg p-6">
+                    <div class="faq-question flex justify-between items-center cursor-pointer">
+                        <h3 class="text-xl font-medium">Что такое Индекс доверия?</h3>
+                        <i class="fas fa-chevron-down accordion-icon text-accent-blue"></i>
+                    </div>
+                    <div class="faq-answer mt-4 text-gray-300">
+                        <p>Индекс доверия — это комплексный показатель от 0 до 100, который оценивает общую достоверность отзывов о компании. Он рассчитывается на основе нескольких параметров:</p>
+                        <ul class="list-disc pl-6 mt-2 space-y-2">
+                            <li>Соотношение положительных и отрицательных отзывов (с учетом нейтральных)</li>
+                            <li>Вероятность накрутки (обратно пропорциональная зависимость)</li>
+                            <li>Частота ответов компании на отзывы</li>
+                            <li>Репутация компании в различных источниках</li>
+                        </ul>
+                        <p class="mt-2">Чем выше индекс доверия, тем более достоверными можно считать отзывы о компании.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item bg-opacity-15 bg-white rounded-lg p-6">
+                    <div class="faq-question flex justify-between items-center cursor-pointer">
+                        <h3 class="text-xl font-medium">Как часто обновляются данные?</h3>
+                        <i class="fas fa-chevron-down accordion-icon text-accent-blue"></i>
+                    </div>
+                    <div class="faq-answer mt-4 text-gray-300">
+                        <p>Первичный анализ компании производится в момент запроса. После этого, в зависимости от выбранного тарифа:</p>
+                        <ul class="list-disc pl-6 mt-2 space-y-2">
+                            <li>Basic: данные доступны в течение месяца с момента первичного анализа</li>
+                            <li>Standard: данные обновляются еженедельно</li>
+                            <li>Premium: данные обновляются ежедневно, возможен мониторинг в режиме реального времени</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Questions -->
+    <section id="pricing" class="py-16 px-4 md:px-0">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-12 text-center">Тарифы и оплата</h2>
+
+            <div class="max-w-3xl mx-auto space-y-6">
+                <div class="faq-item bg-opacity-10 bg-white rounded-lg p-6">
+                    <div class="faq-question flex justify-between items-center cursor-pointer">
+                        <h3 class="text-xl font-medium">Какие тарифные планы доступны?</h3>
+                        <i class="fas fa-chevron-down accordion-icon text-accent-blue"></i>
+                    </div>
+                    <div class="faq-answer mt-4 text-gray-300">
+                        <p>Мы предлагаем три тарифных плана:</p>
+                        <ul class="mt-2 space-y-4">
+                            <li>
+                                <strong class="text-accent-blue">Basic:</strong> 199 рублей за один отчет с базовым анализом и доступом к результатам в течение месяца
+                            </li>
+                            <li>
+                                <strong class="text-accent-blue">Standard:</strong> 4 999 рублей за 100 отчетов в месяц с еженедельным обновлением данных (дополнительные отчеты по 150 рублей)
+                            </li>
+                            <li>
+                                <strong class="text-accent-blue">Premium:</strong> Расширенная функциональность для комплексного анализа, включая мониторинг в реальном времени, API-доступ и персонального менеджера (цена по запросу)
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item bg-opacity-10 bg-white rounded-lg p-6">
+                    <div class="faq-question flex justify-between items-center cursor-pointer">
+                        <h3 class="text-xl font-medium">Какие способы оплаты поддерживаются?</h3>
+                        <i class="fas fa-chevron-down accordion-icon text-accent-blue"></i>
+                    </div>
+                    <div class="faq-answer mt-4 text-gray-300">
+                        <p>Мы поддерживаем следующие способы оплаты:</p>
+                        <ul class="list-disc pl-6 mt-2 space-y-2">
+                            <li>Банковские карты (Visa, MasterCard, МИР)</li>
+                            <li>ЮMoney</li>
+                            <li>Яндекс.Касса</li>
+                            <li>Безналичный расчет (для юридических лиц)</li>
+                        </ul>
+                        <p class="mt-2">Все платежи защищены и проходят через безопасные шлюзы.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item bg-opacity-10 bg-white rounded-lg p-6">
+                    <div class="faq-question flex justify-between items-center cursor-pointer">
+                        <h3 class="text-xl font-medium">Есть ли пробный период?</h3>
+                        <i class="fas fa-chevron-down accordion-icon text-accent-blue"></i>
+                    </div>
+                    <div class="faq-answer mt-4 text-gray-300">
+                        <p>Да, для новых пользователей доступен бесплатный пробный отчет с ограниченной функциональностью. В пробном отчете вы получите:</p>
+                        <ul class="list-disc pl-6 mt-2 space-y-2">
+                            <li>Общий индекс доверия</li>
+                            <li>Базовую статистику по отзывам</li>
+                            <li>Первые 10 отзывов из полного списка</li>
+                        </ul>
+                        <p class="mt-2">Для доступа к полному функционалу и всем отзывам необходимо приобрести один из тарифных планов.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item bg-opacity-10 bg-white rounded-lg p-6">
+                    <div class="faq-question flex justify-between items-center cursor-pointer">
+                        <h3 class="text-xl font-medium">Можно ли отменить подписку?</h3>
+                        <i class="fas fa-chevron-down accordion-icon text-accent-blue"></i>
+                    </div>
+                    <div class="faq-answer mt-4 text-gray-300">
+                        <p>Да, вы можете отменить подписку в любое время в личном кабинете. При отмене подписки:</p>
+                        <ul class="list-disc pl-6 mt-2 space-y-2">
+                            <li>Доступ к сервису сохраняется до конца оплаченного периода</li>
+                            <li>Автоматическое продление не происходит</li>
+                            <li>Ранее сохраненные отчеты остаются доступными в течение 30 дней</li>
+                        </ul>
+                        <p class="mt-2">Мы не взимаем плату за отмену подписки и не применяем скрытые комиссии.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Questions -->
+    <section id="technical" class="skewed-section bg-blue py-16">
+        <div class="container mx-auto px-4 md:px-0">
+            <h2 class="text-3xl font-bold mb-12 text-center">Технические вопросы</h2>
+
+            <div class="max-w-3xl mx-auto space-y-6">
+                <div class="faq-item bg-opacity-15 bg-white rounded-lg p-6">
+                    <div class="faq-question flex justify-between items-center cursor-pointer">
+                        <h3 class="text-xl font-medium">Как скачать отчет в PDF?</h3>
+                        <i class="fas fa-chevron-down accordion-icon text-accent-blue"></i>
+                    </div>
+                    <div class="faq-answer mt-4 text-gray-300">
+                        <p>Для скачивания отчета в формате PDF выполните следующие шаги:</p>
+                        <ol class="list-decimal pl-6 mt-2 space-y-2">
+                            <li>Войдите в личный кабинет</li>
+                            <li>Откройте страницу с результатами анализа компании</li>
+                            <li>Нажмите кнопку "Скачать PDF" в правом верхнем углу страницы</li>
+                            <li>Выберите папку для сохранения файла</li>
+                        </ol>
+                        <p class="mt-2">Обратите внимание, что скачивание PDF-отчетов доступно только для пользователей с активной подпиской.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item bg-opacity-15 bg-white rounded-lg p-6">
+                    <div class="faq-question flex justify-between items-center cursor-pointer">
+                        <h3 class="text-xl font-medium">Есть ли мобильное приложение?</h3>
+                        <i class="fas fa-chevron-down accordion-icon text-accent-blue"></i>
+                    </div>
+                    <div class="faq-answer mt-4 text-gray-300">
+                        <p>В настоящее время мобильное приложение находится в разработке. Пока вы можете использовать адаптивную версию сайта, которая оптимизирована для мобильных устройств, или воспользоваться нашим Telegram-ботом.</p>
+                        <p class="mt-2">Запуск мобильных приложений для iOS и Android планируется в ближайшие месяцы. Зарегистрированные пользователи получат уведомление о выходе приложений.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item bg-opacity-15 bg-white rounded-lg p-6">
+                    <div class="faq-question flex justify-between items-center cursor-pointer">
+                        <h3 class="text-xl font-medium">Как работает Telegram-бот?</h3>
+                        <i class="fas fa-chevron-down accordion-icon text-accent-blue"></i>
+                    </div>
+                    <div class="faq-answer mt-4 text-gray-300">
+                        <p>Наш Telegram-бот предоставляет быстрый доступ к базовым функциям сервиса:</p>
+                        <ul class="list-disc pl-6 mt-2 space-y-2">
+                            <li>Команда /start — приветствие и инструкция по использованию</li>
+                            <li>Команда /check [название или ИНН] — получение краткого отчета о компании</li>
+                            <li>Возможность оплаты для получения полного PDF-отчета</li>
+                        </ul>
+                        <p class="mt-2">Чтобы начать использовать бота, найдите его по имени @ChestnyiOtzyvBot в Telegram или используйте QR-код на нашем сайте.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item bg-opacity-15 bg-white rounded-lg p-6">
+                    <div class="faq-question flex justify-between items-center cursor-pointer">
+                        <h3 class="text-xl font-medium">Доступна ли API-интеграция?</h3>
+                        <i class="fas fa-chevron-down accordion-icon text-accent-blue"></i>
+                    </div>
+                    <div class="faq-answer mt-4 text-gray-300">
+                        <p>Да, для пользователей тарифа Premium доступна API-интеграция, которая позволяет:</p>
+                        <ul class="list-disc pl-6 mt-2 space-y-2">
+                            <li>Автоматизировать проверку отзывов</li>
+                            <li>Интегрировать данные с вашей CRM-системой</li>
+                            <li>Встроить виджет проверки отзывов на ваш сайт</li>
+                            <li>Получать уведомления о новых отзывах</li>
+                        </ul>
+                        <p class="mt-2">Документация по API доступна в личном кабинете пользователей Premium-тарифа или по запросу.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item bg-opacity-15 bg-white rounded-lg p-6">
+                    <div class="faq-question flex justify-between items-center cursor-pointer">
+                        <h3 class="text-xl font-medium">Как обеспечивается безопасность данных?</h3>
+                        <i class="fas fa-chevron-down accordion-icon text-accent-blue"></i>
+                    </div>
+                    <div class="faq-answer mt-4 text-gray-300">
+                        <p>Безопасность данных — наш приоритет. Мы обеспечиваем ее несколькими способами:</p>
+                        <ul class="list-disc pl-6 mt-2 space-y-2">
+                            <li>Шифрование всех передаваемых данных по протоколу HTTPS</li>
+                            <li>Двухфакторная аутентификация для доступа к личному кабинету</li>
+                            <li>Регулярное резервное копирование данных</li>
+                            <li>Хранение персональных данных в соответствии с Федеральным законом "О персональных данных"</li>
+                            <li>Регулярный аудит безопасности системы</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="py-16 px-4 md:px-0">
+        <div class="container mx-auto">
+            <div class="max-w-3xl mx-auto bg-opacity-10 bg-white rounded-lg p-8">
+                <h2 class="text-2xl font-bold mb-6 text-center">Не нашли ответ на свой вопрос?</h2>
+                <p class="text-center text-gray-300 mb-8">Задайте его нам, и мы ответим в течение 24 часов</p>
+
+                <form class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="name" class="block mb-2 text-sm font-medium">Ваше имя</label>
+                            <input type="text" id="name" class="w-full px-4 py-2 rounded-md bg-opacity-20 bg-white border border-gray-600 focus:border-accent-blue focus:outline-none text-white bg-dark-blue" required>
+                        </div>
+                        <div>
+                            <label for="email" class="block mb-2 text-sm font-medium">Электронная почта</label>
+                            <input type="email" id="email" class="w-full px-4 py-2 rounded-md bg-opacity-20 bg-white border border-gray-600 focus:border-accent-blue focus:outline-none text-white bg-dark-blue" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="question" class="block mb-2 text-sm font-medium">Ваш вопрос</label>
+                        <textarea id="question" rows="4" class="w-full px-4 py-2 rounded-md bg-opacity-20 bg-white border border-gray-600 focus:border-accent-blue focus:outline-none text-white bg-dark-blue" required></textarea>
+                    </div>
+                    <div class="flex items-start">
+                        <input id="privacy" type="checkbox" class="mt-1 mr-2" required>
+                        <label for="privacy" class="text-sm text-gray-300">Я согласен на обработку персональных данных в соответствии с <a href="#" class="text-accent-blue hover:underline">Политикой конфиденциальности</a></label>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn-blue px-8 py-3 rounded-md font-medium">Отправить вопрос</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-opacity-30 bg-black py-12 px-4 md:px-0">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <a href="#" class="flex items-center space-x-3 mb-6">
+                        <img src="https://page.genspark.site/v1/base64_upload/bd9256ebf16b58a0aa025819f1155b9d" alt="Логотип Честный отзыв" class="h-10">
+                        <span class="text-white font-bold text-xl">Честный отзыв</span>
+                    </a>
+                    <p class="text-gray-400">Сервис анализа достоверности отзывов с использованием искусственного интеллекта</p>
+                    <p class="text-gray-400 mt-4 text-sm">Все оценки достоверности отзывов являются вероятностными и не являются установлением юридических фактов</p>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-semibold text-lg mb-4">Навигация</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-accent-blue transition">Главная</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-accent-blue transition">О сервисе</a></li>
+                        <li><a href="pricing.html" class="text-gray-400 hover:text-accent-blue transition">Тарифы</a></li>
+                        <li><a href="faq.html" class="text-gray-400 hover:text-accent-blue transition">FAQ</a></li>
+                        <li><a href="contacts.html" class="text-gray-400 hover:text-accent-blue transition">Контакты</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-semibold text-lg mb-4">Юридическая информация</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-accent-blue transition">Пользовательское соглашение</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-accent-blue transition">Политика конфиденциальности</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-accent-blue transition">Обработка персональных данных</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-accent-blue transition">Правовая информация</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-semibold text-lg mb-4">Контакты</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center"><i class="fas fa-envelope mr-2 text-accent-blue"></i> <a href="mailto:info@chestnyiotzuv.ru" class="text-gray-400 hover:text-accent-blue transition">info@chestnyiotzuv.ru</a></li>
+                        <li class="flex items-center"><i class="fas fa-phone mr-2 text-accent-blue"></i> <a href="tel:+78005553535" class="text-gray-400 hover:text-accent-blue transition">8 (800) 555-35-35</a></li>
+                        <li class="flex items-center"><i class="fab fa-telegram mr-2 text-accent-blue"></i> <a href="#" class="text-gray-400 hover:text-accent-blue transition">Telegram-бот</a></li>
+                    </ul>
+                    <div class="mt-6 flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-accent-blue transition text-xl"><i class="fab fa-vk"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-accent-blue transition text-xl"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-accent-blue transition text-xl"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm">© 2024 Честный отзыв. Все права защищены.</p>
+                <p class="text-gray-500 text-sm mt-2 md:mt-0">Используя этот сайт, вы соглашаетесь с использованием файлов cookie</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ accordion functionality
+            const faqQuestions = document.querySelectorAll('.faq-question');
+
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    const icon = this.querySelector('.accordion-icon');
+
+                    if (answer.classList.contains('active')) {
+                        answer.classList.remove('active');
+                        icon.classList.remove('rotate-icon');
+                    } else {
+                        answer.classList.add('active');
+                        icon.classList.add('rotate-icon');
+                    }
+                });
+            });
+
+            // Mobile menu toggle
+            const menuButton = document.querySelector('.md\\:hidden');
+            const mobileMenu = document.querySelector('.md\\:flex');
+
+            if (menuButton) {
+                menuButton.addEventListener('click', function() {
+                    if (mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.remove('hidden');
+                        mobileMenu.classList.add('flex', 'flex-col', 'absolute', 'top-16', 'left-0', 'w-full', 'bg-dark-blue', 'p-4', 'space-y-4');
+                    } else {
+                        mobileMenu.classList.add('hidden');
+                        mobileMenu.classList.remove('flex', 'flex-col', 'absolute', 'top-16', 'left-0', 'w-full', 'bg-dark-blue', 'p-4', 'space-y-4');
+                    }
+                });
+            }
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href');
+                    if (targetId === "#") return;
+
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

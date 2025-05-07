@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О сервисе - Честный отзыв</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark-blue: #011e41;
+            --primary-blue: #0b3d91;
+            --accent-blue: #4c9aff;
+            --light-blue: #dbeafe;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--primary-dark-blue);
+            color: var(--white);
+        }
+
+        .slant-top {
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+
+        .slant-bottom {
+            clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+        }
+
+        .diagonal-section {
+            transform: skewY(-3deg);
+        }
+
+        .diagonal-content {
+            transform: skewY(3deg);
+        }
+
+        .btn-primary {
+            background-color: var(--accent-blue);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+            .btn-primary:hover {
+                background-color: var(--primary-blue);
+                transform: translateY(-2px);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+        .feature-card {
+            background-color: rgba(12, 74, 110, 0.6);
+            border-left: 4px solid var(--accent-blue);
+            transition: all 0.3s ease;
+        }
+
+            .feature-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+            }
+
+        .header-nav a {
+            position: relative;
+        }
+
+            .header-nav a::after {
+                content: '';
+                position: absolute;
+                bottom: -5px;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background-color: var(--accent-blue);
+                transition: width 0.3s ease;
+            }
+
+            .header-nav a:hover::after {
+                width: 100%;
+            }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Header -->
+    <header class="px-4 py-4 md:px-8 lg:px-16 flex justify-between items-center">
+        <a href="index.html" class="flex items-center space-x-3">
+            <img src="https://page.genspark.site/v1/base64_upload/bd9256ebf16b58a0aa025819f1155b9d" alt="Честный отзыв - логотип" class="h-12 w-12">
+            <span class="text-xl font-bold text-white">Честный отзыв</span>
+        </a>
+        <nav class="header-nav hidden md:flex items-center space-x-8">
+            <a href="index.html" class="text-white hover:text-blue-300 transition">Главная</a>
+            <a href="about.html" class="text-blue-300 font-medium">О сервисе</a>
+            <a href="pricing.html" class="text-white hover:text-blue-300 transition">Тарифы</a>
+            <a href="faq.html" class="text-white hover:text-blue-300 transition">FAQ</a>
+            <a href="contacts.html" class="text-white hover:text-blue-300 transition">Контакты</a>
+        </nav>
+        <div class="flex items-center space-x-4">
+            <a href="login.html" class="text-white hover:text-blue-300 transition font-medium hidden md:block">Войти</a>
+            <a href="register.html" class="btn-primary hidden md:block">Регистрация</a>
+            <button class="md:hidden text-white text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="px-4 py-16 md:px-8 lg:px-16 bg-blue-900 slant-bottom relative">
+        <div class="max-w-screen-xl mx-auto">
+            <div class="md:flex items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">О сервисе <br><span class="text-blue-300">Честный отзыв</span></h1>
+                    <p class="text-lg mb-8 text-blue-100 max-w-lg">Мы помогаем пользователям принимать взвешенные решения на основе проверенных отзывов о компаниях и продуктах.</p>
+                    <a href="#how-it-works" class="btn-primary">Узнать больше</a>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="relative">
+                        <div class="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-blue-400 rounded-lg blur opacity-75"></div>
+                        <div class="relative bg-blue-900 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <div class="text-5xl text-blue-300 mr-4"><i class="fas fa-search"></i></div>
+                                <div>
+                                    <h3 class="text-2xl font-bold">Сервис проверки отзывов</h3>
+                                    <p class="text-blue-200">Более 1,000,000 проверенных отзывов</p>
+                                </div>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="flex items-center">
+                                    <div class="text-blue-300 mr-3"><i class="fas fa-check-circle"></i></div>
+                                    <p>Анализ отзывов с популярных площадок</p>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="text-blue-300 mr-3"><i class="fas fa-check-circle"></i></div>
+                                    <p>Выявление подозрительной активности</p>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="text-blue-300 mr-3"><i class="fas fa-check-circle"></i></div>
+                                    <p>Оценка вероятности накрутки отзывов</p>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="text-blue-300 mr-3"><i class="fas fa-check-circle"></i></div>
+                                    <p>Детальная статистика и визуализация</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="px-4 py-24 md:px-8 lg:px-16 bg-gradient-to-b from-blue-800 to-blue-900">
+        <div class="max-w-screen-xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">Как работает <span class="text-blue-300">Честный отзыв</span></h2>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="feature-card p-6 rounded-lg relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-20 h-20 -mt-10 -mr-10 bg-blue-500 opacity-20 rounded-full"></div>
+                    <div class="relative z-10">
+                        <div class="text-blue-300 text-4xl mb-4 flex justify-center md:justify-start">
+                            <span class="bg-blue-800 w-16 h-16 flex items-center justify-center rounded-full">
+                                <i class="fas fa-spider"></i>
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">1. Сбор данных</h3>
+                        <p class="text-blue-100">Сервис собирает отзывы из различных источников: Яндекс.Карты, 2ГИС, Отзовик и Google Maps. Это обеспечивает полную картину мнений о компании или продукте.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card p-6 rounded-lg relative overflow-hidden mt-8 md:mt-0">
+                    <div class="absolute top-0 right-0 w-20 h-20 -mt-10 -mr-10 bg-blue-500 opacity-20 rounded-full"></div>
+                    <div class="relative z-10">
+                        <div class="text-blue-300 text-4xl mb-4 flex justify-center md:justify-start">
+                            <span class="bg-blue-800 w-16 h-16 flex items-center justify-center rounded-full">
+                                <i class="fas fa-chart-line"></i>
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">2. Анализ и обработка</h3>
+                        <p class="text-blue-100">Собранные отзывы подвергаются многоуровневому анализу для выявления подозрительных паттернов, дубликатов, аномальных всплесков и других признаков накрутки.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card p-6 rounded-lg relative overflow-hidden mt-8 md:mt-0">
+                    <div class="absolute top-0 right-0 w-20 h-20 -mt-10 -mr-10 bg-blue-500 opacity-20 rounded-full"></div>
+                    <div class="relative z-10">
+                        <div class="text-blue-300 text-4xl mb-4 flex justify-center md:justify-start">
+                            <span class="bg-blue-800 w-16 h-16 flex items-center justify-center rounded-full">
+                                <i class="fas fa-file-alt"></i>
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">3. Формирование отчета</h3>
+                        <p class="text-blue-100">На основе анализа формируется подробный отчет с индексом доверия, диаграммами, графиками и детальной информацией о выявленных аномалиях в отзывах.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-16 bg-blue-800 bg-opacity-50 p-8 rounded-lg">
+                <div class="md:flex items-center">
+                    <div class="md:w-2/3 mb-8 md:mb-0 md:pr-8">
+                        <h3 class="text-2xl font-bold mb-4">Потенциал для вашего бизнеса</h3>
+                        <p class="mb-4 text-blue-100">Сервис «Честный отзыв» позволяет не только проверить достоверность отзывов о конкурентах, но и контролировать собственную репутацию компании, предупреждая проблемы до их возникновения.</p>
+                        <p class="text-blue-100">Используя наш сервис, вы сможете принимать взвешенные решения, основанные на реальных мнениях клиентов, а не на искусственно созданной репутации.</p>
+                    </div>
+                    <div class="md:w-1/3">
+                        <img src="https://page.genspark.site/v1/base64_upload/bd9256ebf16b58a0aa025819f1155b9d" alt="Честный отзыв" class="mx-auto w-32">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="px-4 py-24 md:px-8 lg:px-16 diagonal-section bg-blue-800">
+        <div class="diagonal-content max-w-screen-xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center">Преимущества <span class="text-blue-300">сервиса</span></h2>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="bg-blue-900 bg-opacity-70 rounded-lg p-6 transform hover:scale-105 transition-all duration-300 shadow-lg">
+                    <div class="flex items-start">
+                        <div class="text-4xl text-blue-300 mr-4">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3">Комплексный сбор данных</h3>
+                            <p class="text-blue-100">Анализ отзывов из нескольких источников одновременно, что дает полную картину о репутации компании.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-blue-900 bg-opacity-70 rounded-lg p-6 transform hover:scale-105 transition-all duration-300 shadow-lg">
+                    <div class="flex items-start">
+                        <div class="text-4xl text-blue-300 mr-4">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3">Выявление накруток</h3>
+                            <p class="text-blue-100">Точное определение подозрительных отзывов, которые могут быть искусственно созданы для улучшения репутации.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-blue-900 bg-opacity-70 rounded-lg p-6 transform hover:scale-105 transition-all duration-300 shadow-lg">
+                    <div class="flex items-start">
+                        <div class="text-4xl text-blue-300 mr-4">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3">Наглядная визуализация</h3>
+                            <p class="text-blue-100">Удобные графики и диаграммы, позволяющие быстро оценить ситуацию и принять правильное решение.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-blue-900 bg-opacity-70 rounded-lg p-6 transform hover:scale-105 transition-all duration-300 shadow-lg">
+                    <div class="flex items-start">
+                        <div class="text-4xl text-blue-300 mr-4">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3">Оперативность</h3>
+                            <p class="text-blue-100">Мгновенный анализ отзывов и формирование отчета за считанные минуты после запроса.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-blue-900 bg-opacity-70 rounded-lg p-6 transform hover:scale-105 transition-all duration-300 shadow-lg">
+                    <div class="flex items-start">
+                        <div class="text-4xl text-blue-300 mr-4">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3">Точность анализа</h3>
+                            <p class="text-blue-100">Продвинутые алгоритмы анализа текста и активности пользователей обеспечивают высокую точность оценки.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-blue-900 bg-opacity-70 rounded-lg p-6 transform hover:scale-105 transition-all duration-300 shadow-lg">
+                    <div class="flex items-start">
+                        <div class="text-4xl text-blue-300 mr-4">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3">Доступность</h3>
+                            <p class="text-blue-100">Доступ к сервису через веб-интерфейс и Telegram-бот для удобства использования в любой ситуации.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <a href="pricing.html" class="btn-primary">Выбрать тариф</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="px-4 py-24 md:px-8 lg:px-16 bg-blue-900">
+        <div class="max-w-screen-xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center">Наша <span class="text-blue-300">команда</span></h2>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-blue-800 rounded-lg p-6 transform hover:scale-105 transition-all duration-300 shadow-lg text-center">
+                    <div class="w-24 h-24 rounded-full bg-blue-600 mx-auto mb-6 flex items-center justify-center text-3xl">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Алексей Петров</h3>
+                    <p class="text-blue-300 mb-3">Руководитель проекта</p>
+                    <p class="text-blue-100">Более 10 лет опыта в разработке аналитических систем для бизнеса.</p>
+                </div>
+
+                <div class="bg-blue-800 rounded-lg p-6 transform hover:scale-105 transition-all duration-300 shadow-lg text-center">
+                    <div class="w-24 h-24 rounded-full bg-blue-600 mx-auto mb-6 flex items-center justify-center text-3xl">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Мария Иванова</h3>
+                    <p class="text-blue-300 mb-3">Руководитель отдела анализа данных</p>
+                    <p class="text-blue-100">Эксперт в области обработки и анализа больших данных с опытом работы в ведущих IT-компаниях.</p>
+                </div>
+
+                <div class="bg-blue-800 rounded-lg p-6 transform hover:scale-105 transition-all duration-300 shadow-lg text-center">
+                    <div class="w-24 h-24 rounded-full bg-blue-600 mx-auto mb-6 flex items-center justify-center text-3xl">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Дмитрий Кузнецов</h3>
+                    <p class="text-blue-300 mb-3">Технический директор</p>
+                    <p class="text-blue-100">Разработчик с многолетним опытом создания высоконагруженных систем и сервисов.</p>
+                </div>
+            </div>
+
+            <div class="mt-16 text-center">
+                <h3 class="text-2xl font-bold mb-4">Присоединяйтесь к нам!</h3>
+                <p class="text-blue-100 max-w-2xl mx-auto mb-8">Мы постоянно развиваемся и ищем талантливых специалистов в нашу команду. Если вы разделяете наши ценности и хотите внести вклад в развитие инновационного сервиса, свяжитесь с нами.</p>
+                <a href="contacts.html" class="btn-primary">Свяжитесь с нами</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="px-4 py-16 md:px-8 lg:px-16 bg-blue-800 slant-top">
+        <div class="max-w-screen-xl mx-auto md:flex items-center justify-between">
+            <div class="md:w-2/3 mb-8 md:mb-0">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Готовы убедиться в достоверности отзывов?</h2>
+                <p class="text-blue-100 text-lg">Зарегистрируйтесь сейчас и получите доступ к полному функционалу сервиса "Честный отзыв".</p>
+            </div>
+            <div class="md:w-1/3 text-center md:text-right">
+                <a href="register.html" class="btn-primary text-lg px-8 py-4">Начать пользоваться</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="px-4 py-12 md:px-8 lg:px-16 bg-blue-900">
+        <div class="max-w-screen-xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <a href="index.html" class="flex items-center space-x-3 mb-6">
+                        <img src="https://page.genspark.site/v1/base64_upload/bd9256ebf16b58a0aa025819f1155b9d" alt="Честный отзыв - логотип" class="h-10 w-10">
+                        <span class="text-lg font-bold text-white">Честный отзыв</span>
+                    </a>
+                    <p class="text-blue-200 mb-4">Сервис проверки достоверности отзывов о компаниях и продуктах.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-blue-300 hover:text-white transition"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="text-blue-300 hover:text-white transition"><i class="fab fa-vk"></i></a>
+                        <a href="#" class="text-blue-300 hover:text-white transition"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Навигация</h3>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-blue-300 hover:text-white transition">Главная</a></li>
+                        <li><a href="about.html" class="text-blue-300 hover:text-white transition">О сервисе</a></li>
+                        <li><a href="pricing.html" class="text-blue-300 hover:text-white transition">Тарифы</a></li>
+                        <li><a href="faq.html" class="text-blue-300 hover:text-white transition">FAQ</a></li>
+                        <li><a href="contacts.html" class="text-blue-300 hover:text-white transition">Контакты</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Документация</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-blue-300 hover:text-white transition">Пользовательское соглашение</a></li>
+                        <li><a href="#" class="text-blue-300 hover:text-white transition">Политика конфиденциальности</a></li>
+                        <li><a href="#" class="text-blue-300 hover:text-white transition">Правила использования</a></li>
+                        <li><a href="#" class="text-blue-300 hover:text-white transition">Публичная оферта</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Контакты</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-blue-300 mr-3"></i>
+                            <a href="mailto:info@honest-review.ru" class="text-blue-300 hover:text-white transition">info@honest-review.ru</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone text-blue-300 mr-3"></i>
+                            <a href="tel:+74951234567" class="text-blue-300 hover:text-white transition">+7 (495) 123-45-67</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-blue-300 mr-3"></i>
+                            <span class="text-blue-200">Москва, ул. Примерная, д. 123</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-blue-800">
+                <div class="md:flex justify-between items-center">
+                    <p class="text-blue-400 text-sm mb-4 md:mb-0">© 2024 Честный отзыв. Все права защищены.</p>
+                    <p class="text-blue-400 text-sm italic">
+                        Сервис анализа достоверности отзывов с использованием искусственного интеллекта.
+                        Все оценки достоверности отзывов являются вероятностными и не являются установлением юридических фактов.
+                    </p>
+                </div>
+                <div class="mt-4">
+                    <p class="text-blue-500 text-xs">Сайт использует файлы cookie для улучшения пользовательского опыта. Продолжая использовать сайт, вы соглашаетесь с использованием файлов cookie.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const menuButton = document.querySelector('button');
+            const navItems = document.querySelector('.header-nav');
+
+            if (menuButton && navItems) {
+                menuButton.addEventListener('click', function() {
+                    if (navItems.classList.contains('hidden')) {
+                        navItems.classList.remove('hidden');
+                        navItems.classList.add('flex', 'flex-col', 'absolute', 'top-20', 'left-0', 'right-0', 'bg-blue-900', 'p-5', 'z-50', 'space-y-4');
+                    } else {
+                        navItems.classList.add('hidden');
+                        navItems.classList.remove('flex', 'flex-col', 'absolute', 'top-20', 'left-0', 'right-0', 'bg-blue-900', 'p-5', 'z-50', 'space-y-4');
+                    }
+                });
+            }
+
+            // Scroll animations
+            const animateOnScroll = function() {
+                const elements = document.querySelectorAll('.feature-card');
+
+                elements.forEach(function(element) {
+                    const position = element.getBoundingClientRect();
+
+                    // If element is in viewport
+                    if(position.top < window.innerHeight && position.bottom >= 0) {
+                        element.classList.add('opacity-100');
+                        element.classList.remove('opacity-0');
+                    }
+                });
+            };
+
+            // Initial check on page load
+            window.addEventListener('load', animateOnScroll);
+            // Check on scroll
+            window.addEventListener('scroll', animateOnScroll);
+        });
+    </script>
+</body>
+</html>

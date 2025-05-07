@@ -1,0 +1,740 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Честный отзыв - Анализ достоверности отзывов</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/all.min.css">
+    <style>
+        :root {
+            --primary-dark-blue: #001b49;
+            --primary-blue: #0046b5;
+            --accent-blue: #2c9cff;
+            --light-blue: #e6f3ff;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--primary-dark-blue);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .diagonal-section {
+            position: relative;
+            padding: 6rem 0;
+            margin-top: -3rem;
+            clip-path: polygon(0 0, 100% 3rem, 100% 100%, 0 calc(100% - 3rem));
+        }
+
+        .diagonal-section-reversed {
+            position: relative;
+            padding: 6rem 0;
+            margin-top: -3rem;
+            clip-path: polygon(0 3rem, 100% 0, 100% calc(100% - 3rem), 0 100%);
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-dark-blue) 0%, var(--primary-blue) 100%);
+            padding-top: 6rem;
+            padding-bottom: 9rem;
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 3rem), 0 100%);
+        }
+
+        .search-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-link {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+            .nav-link::after {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 2px;
+                bottom: -4px;
+                left: 0;
+                background-color: var(--accent-blue);
+                transition: width 0.3s ease;
+            }
+
+            .nav-link:hover::after {
+                width: 100%;
+            }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-blue) 0%, #1e7af5 100%);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(44, 156, 255, 0.3);
+        }
+
+            .btn-primary:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 20px rgba(44, 156, 255, 0.5);
+            }
+
+        .btn-outline {
+            border: 2px solid var(--accent-blue);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+            .btn-outline:hover {
+                background-color: rgba(44, 156, 255, 0.1);
+            }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.1) 100%);
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+            .feature-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            }
+
+        .price-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.1) 100%);
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+            .price-card:hover {
+                transform: scale(1.02);
+            }
+
+            .price-card.highlighted {
+                background: linear-gradient(135deg, rgba(44, 156, 255, 0.05) 0%, rgba(44, 156, 255, 0.2) 100%);
+                border: 1px solid var(--accent-blue);
+            }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--accent-blue) 0%, #1e7af5 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-blue) 0%, #1e7af5 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .step-line {
+            flex-grow: 1;
+            height: 2px;
+            background-color: var(--accent-blue);
+            position: relative;
+        }
+
+            .step-line::after {
+                content: '';
+                position: absolute;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background-color: var(--accent-blue);
+            }
+
+        .chart-graphic {
+            position: relative;
+            width: 100%;
+            height: 200px;
+        }
+
+        .chart-bar {
+            position: absolute;
+            bottom: 0;
+            width: 8%;
+            background: linear-gradient(to top, var(--accent-blue), #1e7af5);
+            border-radius: 4px 4px 0 0;
+            transition: all 0.5s ease;
+        }
+
+        .chart-line {
+            position: absolute;
+            height: 3px;
+            background-color: var(--accent-blue);
+            width: 100%;
+            top: 50%;
+        }
+
+        .chart-dot {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--accent-blue);
+        }
+
+        @media (max-width: 768px) {
+            .diagonal-section, .diagonal-section-reversed {
+                clip-path: none;
+                margin-top: 0;
+            }
+
+            .hero-section {
+                clip-path: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="fixed top-0 w-full z-50 bg-opacity-90 backdrop-filter backdrop-blur-md" style="background-color: rgba(0, 27, 73, 0.9);">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="flex items-center">
+                <img src="https://page.genspark.site/v1/base64_upload/bd9256ebf16b58a0aa025819f1155b9d" alt="Честный отзыв" class="h-10 w-10">
+                <span class="ml-2 text-xl font-bold">Честный отзыв</span>
+            </a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#" class="nav-link">Главная</a>
+                <a href="#" class="nav-link">О сервисе</a>
+                <a href="#" class="nav-link">Тарифы</a>
+                <a href="#" class="nav-link">FAQ</a>
+                <a href="#" class="nav-link">Контакты</a>
+            </div>
+            <div class="hidden md:flex items-center space-x-4">
+                <a href="#" class="btn-outline">Войти</a>
+                <a href="#" class="btn-primary">Регистрация</a>
+            </div>
+            <button class="md:hidden text-white focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Мобильное меню -->
+    <div class="hidden fixed inset-0 bg-gray-900 bg-opacity-95 z-40 flex flex-col justify-center items-center space-y-8 text-xl">
+        <a href="#" class="text-white hover:text-blue-300">Главная</a>
+        <a href="#" class="text-white hover:text-blue-300">О сервисе</a>
+        <a href="#" class="text-white hover:text-blue-300">Тарифы</a>
+        <a href="#" class="text-white hover:text-blue-300">FAQ</a>
+        <a href="#" class="text-white hover:text-blue-300">Контакты</a>
+        <div class="flex flex-col space-y-4 w-full max-w-xs px-4">
+            <a href="#" class="btn-outline text-center">Войти</a>
+            <a href="#" class="btn-primary text-center">Регистрация</a>
+        </div>
+        <button class="absolute top-6 right-6 text-white">
+            <i class="fas fa-times text-3xl"></i>
+        </button>
+    </div>
+
+    <!-- Героический раздел -->
+    <section class="hero-section pt-24 md:pt-32">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                        Анализ достоверности <br class="hidden md:block"><span class="text-accent-blue" style="color: var(--accent-blue);">отзывов</span>
+                    </h1>
+                    <p class="text-lg md:text-xl mb-8 text-gray-300 max-w-xl">
+                        Проверяйте достоверность отзывов компаний и продуктов перед принятием решения. Выявляйте накрутки и получайте честную информацию.
+                    </p>
+                    <div class="search-box p-2 md:p-3 flex flex-col md:flex-row items-stretch mb-8">
+                        <input type="text" placeholder="Введите название компании или ИНН" class="flex-grow bg-transparent border-none focus:outline-none text-white px-4 py-3 md:py-2 mb-2 md:mb-0">
+                        <button class="btn-primary whitespace-nowrap">Проверить отзывы</button>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center md:justify-end">
+                    <div class="relative w-full max-w-lg">
+                        <div class="absolute w-72 h-72 bg-accent-blue rounded-full mix-blend-multiply filter blur-3xl opacity-20 -top-10 right-0"></div>
+                        <div class="absolute w-72 h-72 bg-blue-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 bottom-10 left-0"></div>
+                        <div class="relative">
+                            <img src="https://page.genspark.site/v1/base64_upload/bd9256ebf16b58a0aa025819f1155b9d" alt="Честный отзыв" class="w-full max-w-sm mx-auto">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция преимуществ -->
+    <section class="diagonal-section" style="background-color: rgba(0, 35, 90, 1);">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">Преимущества сервиса</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="feature-card p-6 md:p-8">
+                    <div class="feature-icon mb-6">
+                        <i class="fas fa-search text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Автоматический сбор отзывов</h3>
+                    <p class="text-gray-300">
+                        Собираем и анализируем отзывы с популярных платформ: Яндекс.Карты, 2ГИС, Отзовик и Google Maps.
+                    </p>
+                </div>
+                <div class="feature-card p-6 md:p-8">
+                    <div class="feature-icon mb-6">
+                        <i class="fas fa-chart-bar text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Определение накрутки</h3>
+                    <p class="text-gray-300">
+                        Выявляем подозрительные паттерны и неестественную активность в отзывах с точностью до 95%.
+                    </p>
+                </div>
+                <div class="feature-card p-6 md:p-8">
+                    <div class="feature-icon mb-6">
+                        <i class="fas fa-bolt text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Мгновенный результат</h3>
+                    <p class="text-gray-300">
+                        Получайте результаты анализа в течение нескольких минут с подробной статистикой и визуализацией.
+                    </p>
+                </div>
+                <div class="feature-card p-6 md:p-8">
+                    <div class="feature-icon mb-6">
+                        <i class="fas fa-file-pdf text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">PDF-отчеты</h3>
+                    <p class="text-gray-300">
+                        Скачивайте подробные отчеты с анализом в удобном формате PDF для дальнейшего использования.
+                    </p>
+                </div>
+                <div class="feature-card p-6 md:p-8">
+                    <div class="feature-icon mb-6">
+                        <i class="fab fa-telegram text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Интеграция с Telegram</h3>
+                    <p class="text-gray-300">
+                        Используйте наш Telegram-бот для быстрого получения отчетов и уведомлений о новых отзывах.
+                    </p>
+                </div>
+                <div class="feature-card p-6 md:p-8">
+                    <div class="feature-icon mb-6">
+                        <i class="fas fa-lock text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Защита репутации</h3>
+                    <p class="text-gray-300">
+                        Мониторинг отзывов поможет бизнесу выявить недобросовестных конкурентов и защитить репутацию.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция "Как это работает" -->
+    <section class="diagonal-section-reversed" style="background-color: rgba(0, 40, 105, 1);">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">Как это работает</h2>
+            <div class="flex flex-col items-center max-w-4xl mx-auto">
+                <div class="flex flex-col md:flex-row items-center mb-16 w-full">
+                    <div class="md:w-1/4 flex justify-center mb-6 md:mb-0">
+                        <div class="step-circle">1</div>
+                    </div>
+                    <div class="md:w-3/4 md:pl-8">
+                        <h3 class="text-2xl font-semibold mb-3">Поиск компании</h3>
+                        <p class="text-gray-300">
+                            Введите название компании или ИНН в поисковую строку. Система найдет все доступные источники отзывов.
+                        </p>
+                    </div>
+                </div>
+                <div class="hidden md:block w-1/2 h-px bg-accent-blue my-4" style="background-color: var(--accent-blue);"></div>
+                <div class="flex flex-col md:flex-row items-center mb-16 w-full">
+                    <div class="md:w-1/4 flex justify-center mb-6 md:mb-0">
+                        <div class="step-circle">2</div>
+                    </div>
+                    <div class="md:w-3/4 md:pl-8">
+                        <h3 class="text-2xl font-semibold mb-3">Сбор и анализ</h3>
+                        <p class="text-gray-300">
+                            Автоматически собираем отзывы со всех платформ и анализируем их на предмет достоверности, выявляя аномалии.
+                        </p>
+                    </div>
+                </div>
+                <div class="hidden md:block w-1/2 h-px bg-accent-blue my-4" style="background-color: var(--accent-blue);"></div>
+                <div class="flex flex-col md:flex-row items-center mb-16 w-full">
+                    <div class="md:w-1/4 flex justify-center mb-6 md:mb-0">
+                        <div class="step-circle">3</div>
+                    </div>
+                    <div class="md:w-3/4 md:pl-8">
+                        <h3 class="text-2xl font-semibold mb-3">Визуализация данных</h3>
+                        <p class="text-gray-300">
+                            Формируем наглядные графики, диаграммы и рассчитываем индекс доверия на основе проанализированных данных.
+                        </p>
+                    </div>
+                </div>
+                <div class="hidden md:block w-1/2 h-px bg-accent-blue my-4" style="background-color: var(--accent-blue);"></div>
+                <div class="flex flex-col md:flex-row items-center w-full">
+                    <div class="md:w-1/4 flex justify-center mb-6 md:mb-0">
+                        <div class="step-circle">4</div>
+                    </div>
+                    <div class="md:w-3/4 md:pl-8">
+                        <h3 class="text-2xl font-semibold mb-3">Готовый отчет</h3>
+                        <p class="text-gray-300">
+                            Получите подробный отчет с рекомендациями. Сохраните его в личном кабинете или скачайте в формате PDF.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-20 flex justify-center">
+                <a href="#" class="btn-primary px-10 py-4 text-lg">Попробовать бесплатно</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Демонстрация анализа отзывов -->
+    <section class="diagonal-section" style="background-color: rgba(0, 35, 90, 1);">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">Наглядная аналитика отзывов</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                <div class="bg-opacity-10 bg-white rounded-xl p-6 md:p-8">
+                    <h3 class="text-xl font-semibold mb-4 text-accent-blue" style="color: var(--accent-blue);">Индекс доверия</h3>
+                    <div class="relative h-48 flex items-center justify-center">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-36 h-36 rounded-full border-8 border-gray-700 flex items-center justify-center">
+                                <div class="w-28 h-28 rounded-full bg-gradient-to-br from-accent-blue to-blue-600 flex items-center justify-center">
+                                    <span class="text-4xl font-bold">82%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <svg class="absolute" width="180" height="180" viewBox="0 0 180 180">
+                            <circle cx="90" cy="90" r="80" fill="none" stroke="#ffffff20" stroke-width="12" />
+                            <circle cx="90" cy="90" r="80" fill="none" stroke="var(--accent-blue)" stroke-width="12" stroke-dasharray="502" stroke-dashoffset="90" transform="rotate(-90 90 90)" />
+                        </svg>
+                    </div>
+                    <p class="text-gray-300 mt-4">
+                        Комплексная оценка, учитывающая вероятность накрутки, разнообразие отзывов и их естественность.
+                    </p>
+                </div>
+
+                <div class="bg-opacity-10 bg-white rounded-xl p-6 md:p-8">
+                    <h3 class="text-xl font-semibold mb-4 text-accent-blue" style="color: var(--accent-blue);">Распределение оценок</h3>
+                    <div class="chart-graphic">
+                        <div class="chart-bar" style="left: 5%; height: 60%; animation-delay: 0.1s;"></div>
+                        <div class="chart-bar" style="left: 15%; height: 20%; animation-delay: 0.2s;"></div>
+                        <div class="chart-bar" style="left: 25%; height: 10%; animation-delay: 0.3s;"></div>
+                        <div class="chart-bar" style="left: 35%; height: 15%; animation-delay: 0.4s;"></div>
+                        <div class="chart-bar" style="left: 45%; height: 80%; animation-delay: 0.5s;"></div>
+                        <div class="chart-bar" style="left: 55%; height: 90%; animation-delay: 0.6s;"></div>
+                        <div class="chart-bar" style="left: 65%; height: 40%; animation-delay: 0.7s;"></div>
+                        <div class="chart-bar" style="left: 75%; height: 30%; animation-delay: 0.8s;"></div>
+                        <div class="chart-bar" style="left: 85%; height: 70%; animation-delay: 0.9s;"></div>
+                    </div>
+                    <div class="flex justify-between text-sm text-gray-400 mt-2">
+                        <span>★</span>
+                        <span>★★</span>
+                        <span>★★★</span>
+                        <span>★★★★</span>
+                        <span>★★★★★</span>
+                    </div>
+                    <p class="text-gray-300 mt-4">
+                        Визуализация распределения отзывов по оценкам с выделением аномальных паттернов.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-opacity-10 bg-white rounded-xl p-6 md:p-8">
+                    <h3 class="text-xl font-semibold mb-4 text-accent-blue" style="color: var(--accent-blue);">Вероятность накрутки</h3>
+                    <div class="relative h-32">
+                        <div class="absolute bottom-0 w-full h-4 bg-gray-700 rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-green-400 via-yellow-400 to-red-500 rounded-full" style="width: 45%"></div>
+                        </div>
+                        <div class="absolute bottom-8 left-[45%] transform -translate-x-1/2 w-4 h-4 bg-white rounded-full"></div>
+                        <div class="absolute bottom-16 left-[45%] transform -translate-x-1/2 text-lg font-semibold">45%</div>
+                        <div class="absolute bottom-0 w-full flex justify-between text-xs text-gray-400 mt-6">
+                            <span>0%</span>
+                            <span>50%</span>
+                            <span>100%</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mt-12">
+                        Оценка вероятности искусственного происхождения отзывов на основе множества факторов.
+                    </p>
+                </div>
+
+                <div class="bg-opacity-10 bg-white rounded-xl p-6 md:p-8">
+                    <h3 class="text-xl font-semibold mb-4 text-accent-blue" style="color: var(--accent-blue);">Выявленные аномалии</h3>
+                    <ul class="space-y-3 text-gray-300">
+                        <li class="flex items-center">
+                            <i class="fas fa-exclamation-triangle text-yellow-500 mr-3"></i>
+                            <span>12 отзывов с оценкой 5★ за один день</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-exclamation-triangle text-yellow-500 mr-3"></i>
+                            <span>8 идентичных отзывов с разных аккаунтов</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-exclamation-triangle text-yellow-500 mr-3"></i>
+                            <span>Резкий скачок положительных отзывов</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-exclamation-triangle text-yellow-500 mr-3"></i>
+                            <span>15 новых аккаунтов с первым отзывом</span>
+                        </li>
+                    </ul>
+                    <p class="text-gray-300 mt-4">
+                        Обнаруженные подозрительные паттерны поведения в отзывах и рейтингах.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Тарифные планы -->
+    <section class="diagonal-section-reversed" style="background-color: rgba(0, 40, 105, 1);">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center">Тарифы</h2>
+            <p class="text-gray-300 text-center mb-12 max-w-2xl mx-auto">Выберите подходящий тарифный план для анализа отзывов компаний</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="price-card p-8 flex flex-col">
+                    <h3 class="text-2xl font-semibold mb-2">Basic</h3>
+                    <p class="text-gray-400 mb-6">Для единоразовой проверки</p>
+                    <div class="text-4xl font-bold mb-2 text-accent-blue" style="color: var(--accent-blue);">199 ₽</div>
+                    <p class="text-gray-400 mb-6">за один отчет</p>
+                    <div class="flex-grow">
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-accent-blue mr-3 mt-1" style="color: var(--accent-blue);"></i>
+                                <span>Полный анализ одной компании</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-accent-blue mr-3 mt-1" style="color: var(--accent-blue);"></i>
+                                <span>Проверка отзывов с Яндекс, 2ГИС, Отзовик</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-accent-blue mr-3 mt-1" style="color: var(--accent-blue);"></i>
+                                <span>Выгрузка отчета в PDF</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-accent-blue mr-3 mt-1" style="color: var(--accent-blue);"></i>
+                                <span>Обновление данных в течение месяца</span>
+                            </li>
+                            <li class="flex items-start text-gray-500">
+                                <i class="fas fa-times mr-3 mt-1"></i>
+                                <span>Мониторинг изменений</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="#" class="btn-primary text-center">Выбрать</a>
+                </div>
+
+                <div class="price-card highlighted p-8 flex flex-col relative scale-105 md:scale-110 -mt-6 z-10">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-accent-blue text-white px-4 py-1 rounded-full text-sm font-semibold" style="background-color: var(--accent-blue);">Популярный</div>
+                    <h3 class="text-2xl font-semibold mb-2">Standard</h3>
+                    <p class="text-gray-400 mb-6">Для регулярного мониторинга</p>
+                    <div class="text-4xl font-bold mb-2 text-accent-blue" style="color: var(--accent-blue);">4 999 ₽</div>
+                    <p class="text-gray-400 mb-6">за 100 отчетов</p>
+                    <div class="flex-grow">
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-accent-blue mr-3 mt-1" style="color: var(--accent-blue);"></i>
+                                <span>100 отчетов в месяц</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-accent-blue mr-3 mt-1" style="color: var(--accent-blue);"></i>
+                                <span>Все источники отзывов</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-accent-blue mr-3 mt-1" style="color: var(--accent-blue);"></i>
+                                <span>Еженедельное обновление данных</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-accent-blue mr-3 mt-1" style="color: var(--accent-blue);"></i>
+                                <span>Расширенная аналитика</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-accent-blue mr-3 mt-1" style="color: var(--accent-blue);"></i>
+                                <span>Доступ к истории отчетов</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="#" class="btn-primary text-center">Выбрать</a>
+                </div>
+
+                <div class="price-card p-8 flex flex-col">
+                    <h3 class="text-2xl font-semibold mb-2">Premium</h3>
+                    <p class="text-gray-400 mb-6">Для продвинутого анализа</p>
+                    <div class="text-4xl font-bold mb-2 text-accent-blue" style="color: var(--accent-blue);">По запросу</div>
+                    <p class="text-gray-400 mb-6">индивидуальные условия</p>
+                    <div class="flex-grow">
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-accent-blue mr-3 mt-1" style="color: var(--accent-blue);"></i>
+                                <span>Неограниченное количество отчетов</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-accent-blue mr-3 mt-1" style="color: var(--accent-blue);"></i>
+                                <span>API для интеграции с CRM</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-accent-blue mr-3 mt-1" style="color: var(--accent-blue);"></i>
+                                <span>Мониторинг в реальном времени</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-accent-blue mr-3 mt-1" style="color: var(--accent-blue);"></i>
+                                <span>Расширенная аналитика конкурентов</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-accent-blue mr-3 mt-1" style="color: var(--accent-blue);"></i>
+                                <span>Персональный менеджер</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="#" class="btn-primary text-center">Связаться с нами</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Призыв к действию -->
+    <section class="bg-gradient-to-br from-accent-blue to-blue-700 py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Готовы проверить честность отзывов?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Начните использовать сервис «Честный отзыв» прямо сейчас и получите достоверную информацию о компаниях</p>
+            <a href="#" class="btn-primary bg-white text-blue-700 hover:bg-gray-100 px-8 py-4 text-lg">Попробовать бесплатно</a>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="bg-gray-900 pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <img src="https://page.genspark.site/v1/base64_upload/bd9256ebf16b58a0aa025819f1155b9d" alt="Честный отзыв" class="h-10 w-10">
+                        <span class="ml-2 text-xl font-bold">Честный отзыв</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Сервис анализа достоверности отзывов с использованием искусственного интеллекта
+                    </p>
+                    <p class="text-gray-500 text-sm">
+                        Все оценки достоверности отзывов являются вероятностными и не являются установлением юридических фактов
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Навигация</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-accent-blue transition">Главная</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-accent-blue transition">О сервисе</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-accent-blue transition">Тарифы</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-accent-blue transition">FAQ</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-accent-blue transition">Контакты</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Полезные ссылки</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-accent-blue transition">Для бизнеса</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-accent-blue transition">API документация</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-accent-blue transition">Telegram бот</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-accent-blue transition">Блог</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Контакты</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-accent-blue"></i>
+                            <a href="mailto:info@honest-review.ru" class="text-gray-400 hover:text-accent-blue transition">info@honest-review.ru</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone mr-3 text-accent-blue"></i>
+                            <a href="tel:+74951234567" class="text-gray-400 hover:text-accent-blue transition">+7 (495) 123-45-67</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fab fa-telegram mr-3 text-accent-blue"></i>
+                            <a href="#" class="text-gray-400 hover:text-accent-blue transition">@honest_review_bot</a>
+                        </li>
+                    </ul>
+                    <div class="flex space-x-4 mt-6">
+                        <a href="#" class="text-gray-400 hover:text-accent-blue transition">
+                            <i class="fab fa-vk text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-accent-blue transition">
+                            <i class="fab fa-telegram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-accent-blue transition">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-6 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2024 Честный отзыв. Все права защищены.</p>
+                <div class="flex flex-wrap justify-center space-x-4">
+                    <a href="#" class="text-gray-500 hover:text-gray-300 text-sm">Политика конфиденциальности</a>
+                    <a href="#" class="text-gray-500 hover:text-gray-300 text-sm">Пользовательское соглашение</a>
+                    <a href="#" class="text-gray-500 hover:text-gray-300 text-sm">Использование cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Анимация графиков при прокрутке
+        document.addEventListener('DOMContentLoaded', function() {
+            const chartBars = document.querySelectorAll('.chart-bar');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.height = entry.target.style.height;
+                        entry.target.style.height = '0%';
+                        setTimeout(() => {
+                            entry.target.style.transition = 'height 1s ease';
+                            entry.target.style.height = entry.target.getAttribute('data-height') || entry.target.style.height;
+                        }, 100);
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            chartBars.forEach(bar => {
+                bar.setAttribute('data-height', bar.style.height);
+                bar.style.height = '0%';
+                observer.observe(bar);
+            });
+
+            // Мобильное меню
+            const menuButton = document.querySelector('.md\\:hidden.text-white');
+            const mobileMenu = document.querySelector('.hidden.fixed.inset-0');
+            const closeButton = document.querySelector('.absolute.top-6.right-6');
+
+            if (menuButton && mobileMenu && closeButton) {
+                menuButton.addEventListener('click', () => {
+                    mobileMenu.classList.remove('hidden');
+                });
+
+                closeButton.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

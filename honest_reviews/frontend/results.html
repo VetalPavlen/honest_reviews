@@ -1,0 +1,802 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Результаты анализа - Честный отзыв</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <style>
+        :root {
+            --primary-dark: #001e3c;
+            --primary-blue: #0059b3;
+            --accent-blue: #0099ff;
+            --light-blue: #e6f5ff;
+            --secondary-blue: #66b3ff;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--primary-dark);
+            color: white;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-blue));
+        }
+
+        .skewed-section {
+            position: relative;
+            transform: skewY(-3deg);
+            margin-top: -3rem;
+            margin-bottom: -3rem;
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+            z-index: 10;
+        }
+
+            .skewed-section > * {
+                transform: skewY(3deg);
+            }
+
+        .blue-gradient {
+            background: linear-gradient(90deg, var(--primary-blue), var(--accent-blue));
+        }
+
+        .card {
+            background-color: rgba(0, 30, 60, 0.7);
+            border: 1px solid var(--secondary-blue);
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 153, 255, 0.15);
+            backdrop-filter: blur(5px);
+        }
+
+        .progress-bar {
+            height: 10px;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .progress-value {
+            border-radius: 5px;
+            height: 100%;
+            background: linear-gradient(90deg, #00ccff, #0059b3);
+        }
+
+        .btn-blue {
+            background: linear-gradient(135deg, var(--accent-blue), var(--primary-blue));
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+            .btn-blue:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 10px 20px rgba(0, 153, 255, 0.2);
+            }
+
+        .table-row-alternate:nth-child(odd) {
+            background-color: rgba(0, 30, 60, 0.4);
+        }
+
+        .table-row-alternate:nth-child(even) {
+            background-color: rgba(0, 40, 80, 0.4);
+        }
+
+        .anomaly-badge {
+            background-color: rgba(255, 100, 100, 0.2);
+            border: 1px solid rgba(255, 100, 100, 0.5);
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-size: 0.7rem;
+            color: #ffcccc;
+        }
+
+        .trust-high {
+            color: #4ade80;
+        }
+
+        .trust-medium {
+            color: #fbbf24;
+        }
+
+        .trust-low {
+            color: #f87171;
+        }
+
+        .rating-stars {
+            color: #ffc107;
+        }
+
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 250px;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen">
+    <!-- Навигационная панель -->
+    <nav class="sticky top-0 z-50 bg-opacity-90 backdrop-filter backdrop-blur-lg" style="background-color: var(--primary-dark);">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="flex items-center">
+                        <img src="https://page.genspark.site/v1/base64_upload/bd9256ebf16b58a0aa025819f1155b9d" alt="Честный отзыв" class="h-10">
+                        <span class="ml-3 text-xl font-bold text-white">Честный отзыв</span>
+                    </a>
+                </div>
+
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="text-white hover:text-blue-300 transition">Главная</a>
+                    <a href="about.html" class="text-white hover:text-blue-300 transition">О сервисе</a>
+                    <a href="pricing.html" class="text-white hover:text-blue-300 transition">Тарифы</a>
+                    <a href="faq.html" class="text-white hover:text-blue-300 transition">FAQ</a>
+                    <a href="contacts.html" class="text-white hover:text-blue-300 transition">Контакты</a>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="px-4 py-2 rounded-md text-white hover:bg-blue-700 transition border border-blue-500">Войти</a>
+                    <a href="#" class="hidden md:inline-block px-4 py-2 rounded-md bg-gradient-to-r from-blue-500 to-blue-700 text-white hover:from-blue-600 hover:to-blue-800 transition">Регистрация</a>
+                    <button class="md:hidden focus:outline-none">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Основной контент -->
+    <main>
+        <!-- Секция с информацией о компании -->
+        <section class="py-8 px-4">
+            <div class="container mx-auto">
+                <div class="flex flex-col md:flex-row justify-between mb-6">
+                    <div>
+                        <h1 class="text-3xl font-bold mb-2">Отчет: ООО "Цифровые решения"</h1>
+                        <p class="text-blue-300">ИНН: 7707394226 • ОГРН: 1177746893337</p>
+                        <div class="flex items-center mt-2">
+                            <span class="text-xl mr-2">Общий рейтинг:</span>
+                            <div class="rating-stars text-xl">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="ml-2 text-xl">4.3</span>
+                        </div>
+                    </div>
+                    <div class="flex space-x-3 mt-4 md:mt-0">
+                        <button class="btn-blue px-4 py-2 rounded-md flex items-center">
+                            <i class="far fa-save mr-2"></i> Сохранить отчет
+                        </button>
+                        <button class="btn-blue px-4 py-2 rounded-md flex items-center">
+                            <i class="far fa-file-pdf mr-2"></i> Скачать PDF
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Основные метрики -->
+        <section class="skewed-section bg-blue-900 bg-opacity-30">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Индекс доверия -->
+                    <div class="card p-6">
+                        <h2 class="text-xl font-semibold mb-4">Индекс доверия</h2>
+                        <div class="flex items-center justify-center mb-6">
+                            <div class="relative w-40 h-40">
+                                <svg class="w-full h-full" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="10" />
+                                    <circle cx="50" cy="50" r="45" fill="none" stroke="#4ade80" stroke-width="10" stroke-dasharray="283" stroke-dashoffset="56.6" transform="rotate(-90 50 50)" />
+                                    <text x="50" y="50" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="24" font-weight="bold">82</text>
+                                    <text x="50" y="70" text-anchor="middle" dominant-baseline="middle" fill="#4ade80" font-size="14">Высокий</text>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span>Соотношение оценок</span>
+                                    <span class="trust-high">+25 баллов</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-value" style="width: 87%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span>Антифрод-проверка</span>
+                                    <span class="trust-high">+28 баллов</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-value" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span>Динамика репутации</span>
+                                    <span class="trust-high">+23 балла</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-value" style="width: 92%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Вероятность накрутки -->
+                    <div class="card p-6">
+                        <h2 class="text-xl font-semibold mb-4">Вероятность накрутки</h2>
+                        <div class="flex items-center justify-center mb-6">
+                            <div class="relative w-40 h-40">
+                                <svg class="w-full h-full" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="10" />
+                                    <circle cx="50" cy="50" r="45" fill="none" stroke="#f87171" stroke-width="10" stroke-dasharray="283" stroke-dashoffset="226.4" transform="rotate(-90 50 50)" />
+                                    <text x="50" y="50" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="24" font-weight="bold">20%</text>
+                                    <text x="50" y="70" text-anchor="middle" dominant-baseline="middle" fill="#4ade80" font-size="14">Низкая</text>
+                                </svg>
+                            </div>
+                        </div>
+                        <ul class="space-y-3 text-sm">
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                                <span>Не обнаружено массовых одновременных публикаций</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                                <span>Отсутствуют шаблонные тексты в отзывах</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                                <span>Естественное распределение оценок</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-exclamation-triangle text-yellow-400 mr-2"></i>
+                                <span>Обнаружено 3 подозрительных отзыва (помечены в таблице)</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Сводная статистика -->
+                    <div class="card p-6">
+                        <h2 class="text-xl font-semibold mb-4">Сводная статистика</h2>
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-blue-300">137</div>
+                                <div class="text-sm text-gray-300">Всего отзывов</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-green-400">94</div>
+                                <div class="text-sm text-gray-300">Положительных</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-yellow-400">23</div>
+                                <div class="text-sm text-gray-300">Нейтральных</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-red-400">20</div>
+                                <div class="text-sm text-gray-300">Негативных</div>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span>Ответы компании</span>
+                                    <span>78% (107 из 137)</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-value" style="width: 78%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span>Время ответа</span>
+                                    <span>≈ 4.2 ч.</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-value" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="pt-3">
+                                <span class="text-sm text-gray-300">Последний отзыв: 28.05.2024</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Графики и анализ -->
+        <section class="py-12 px-4">
+            <div class="container mx-auto mb-8">
+                <h2 class="text-2xl font-bold mb-6">Анализ источников отзывов</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Распределение по источникам -->
+                    <div class="card p-6">
+                        <h3 class="text-xl font-semibold mb-4">Распределение по источникам</h3>
+                        <div class="chart-container">
+                            <canvas id="sourcesChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Распределение оценок -->
+                    <div class="card p-6">
+                        <h3 class="text-xl font-semibold mb-4">Распределение оценок</h3>
+                        <div class="chart-container">
+                            <canvas id="ratingsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mx-auto">
+                <h2 class="text-2xl font-bold mb-6">Динамика отзывов</h2>
+                <div class="card p-6">
+                    <div class="flex justify-between mb-4">
+                        <h3 class="text-xl font-semibold">Активность по месяцам</h3>
+                        <div>
+                            <select class="bg-blue-900 text-white border border-blue-500 rounded px-3 py-1">
+                                <option>Последние 6 месяцев</option>
+                                <option>Последний год</option>
+                                <option>Все время</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="chart-container h-64">
+                        <canvas id="activityChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Обнаруженные аномалии -->
+        <section class="skewed-section bg-red-900 bg-opacity-10">
+            <div class="container mx-auto px-4">
+                <h2 class="text-2xl font-bold mb-6">Обнаруженные аномалии и паттерны</h2>
+
+                <div class="bg-red-900 bg-opacity-20 border border-red-500 rounded-lg p-4 mb-6">
+                    <div class="flex items-start">
+                        <i class="fas fa-exclamation-triangle text-red-400 mr-3 mt-1"></i>
+                        <div>
+                            <h3 class="font-semibold text-lg text-red-300">Подозрительные паттерны</h3>
+                            <p>Система обнаружила небольшое количество подозрительных активностей, которые могут указывать на манипуляции с отзывами. Общая вероятность накрутки оценена как низкая.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Аномалия 1 -->
+                    <div class="card p-5 border-red-500 border">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-calendar-alt text-red-400 mr-3"></i>
+                            <h4 class="font-semibold">Временная аномалия</h4>
+                        </div>
+                        <p class="text-sm mb-3">3 отзыва с оценкой 5★ опубликованы в течение 15 минут (18.04.2024)</p>
+                        <div class="text-xs text-gray-300">
+                            <span>Значимость:</span>
+                            <span class="text-yellow-400 ml-2">Средняя</span>
+                        </div>
+                    </div>
+
+                    <!-- Аномалия 2 -->
+                    <div class="card p-5 border-yellow-500 border">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-user-alt text-yellow-400 mr-3"></i>
+                            <h4 class="font-semibold">Аномалия аккаунтов</h4>
+                        </div>
+                        <p class="text-sm mb-3">2 новых аккаунта без истории оставили позитивные отзывы</p>
+                        <div class="text-xs text-gray-300">
+                            <span>Значимость:</span>
+                            <span class="text-yellow-400 ml-2">Низкая</span>
+                        </div>
+                    </div>
+
+                    <!-- Аномалия 3 -->
+                    <div class="card p-5 border-yellow-500 border">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-file-alt text-yellow-400 mr-3"></i>
+                            <h4 class="font-semibold">Текстовая аномалия</h4>
+                        </div>
+                        <p class="text-sm mb-3">Обнаружены похожие фразы в 2 отзывах от разных пользователей</p>
+                        <div class="text-xs text-gray-300">
+                            <span>Значимость:</span>
+                            <span class="text-yellow-400 ml-2">Низкая</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Таблица отзывов -->
+        <section class="py-12 px-4">
+            <div class="container mx-auto">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold">Отзывы (137)</h2>
+                    <div class="flex space-x-3">
+                        <select class="bg-blue-900 text-white border border-blue-500 rounded px-3 py-1">
+                            <option>Все источники</option>
+                            <option>Яндекс.Карты</option>
+                            <option>2ГИС</option>
+                            <option>Отзовик</option>
+                            <option>Google Maps</option>
+                        </select>
+                        <select class="bg-blue-900 text-white border border-blue-500 rounded px-3 py-1">
+                            <option>Все оценки</option>
+                            <option>5 звезд</option>
+                            <option>4 звезды</option>
+                            <option>3 звезды</option>
+                            <option>2 звезды</option>
+                            <option>1 звезда</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="text-left border-b border-blue-800">
+                                <th class="pb-3">Автор</th>
+                                <th class="pb-3">Дата</th>
+                                <th class="pb-3">Оценка</th>
+                                <th class="pb-3">Источник</th>
+                                <th class="pb-3">Отзыв</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Отзыв 1 -->
+                            <tr class="table-row-alternate border-b border-blue-800">
+                                <td class="py-4 pr-6">
+                                    <div class="font-medium">Алексей С.</div>
+                                </td>
+                                <td class="py-4 pr-6">28.05.2024</td>
+                                <td class="py-4 pr-6">
+                                    <div class="rating-stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </td>
+                                <td class="py-4 pr-6">2ГИС</td>
+                                <td class="py-4">
+                                    <div class="mb-2">Обращался в компанию для подбора программного обеспечения. Остался очень доволен работой менеджера Марии. Быстро подобрала ПО под мои задачи, проконсультировала по всем вопросам. Рекомендую!</div>
+                                    <div class="text-sm text-blue-300 italic">
+                                        <i class="fas fa-reply mr-1"></i> Ответ компании: Алексей, благодарим за отзыв! Рады, что смогли помочь.
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Отзыв 2 -->
+                            <tr class="table-row-alternate border-b border-blue-800">
+                                <td class="py-4 pr-6">
+                                    <div class="font-medium">Ирина К.</div>
+                                </td>
+                                <td class="py-4 pr-6">25.05.2024</td>
+                                <td class="py-4 pr-6">
+                                    <div class="rating-stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                </td>
+                                <td class="py-4 pr-6">Яндекс.Карты</td>
+                                <td class="py-4">
+                                    <div class="mb-2">Не очень понравилось обслуживание. Долго ждала ответа от менеджера, приходилось несколько раз звонить. Само ПО в целом соответствует заявленному, но есть недочеты в работе.</div>
+                                    <div class="text-sm text-blue-300 italic">
+                                        <i class="fas fa-reply mr-1"></i> Ответ компании: Ирина, приносим извинения за доставленные неудобства. Мы работаем над улучшением качества обслуживания. Свяжемся с вами для решения проблем с ПО.
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Отзыв 3 с аномалией -->
+                            <tr class="table-row-alternate border-b border-blue-800 bg-red-900 bg-opacity-10">
+                                <td class="py-4 pr-6">
+                                    <div class="font-medium">Николай В.</div>
+                                    <div class="anomaly-badge mt-1">Новый аккаунт</div>
+                                </td>
+                                <td class="py-4 pr-6">18.04.2024</td>
+                                <td class="py-4 pr-6">
+                                    <div class="rating-stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div class="anomaly-badge mt-1">Временная аномалия</div>
+                                </td>
+                                <td class="py-4 pr-6">Отзовик</td>
+                                <td class="py-4">
+                                    <div class="mb-2">Отличная компания! Сервис на высшем уровне, все быстро и качественно. Персонал вежливый и компетентный. Буду рекомендовать друзьям и коллегам!</div>
+                                    <div class="text-sm text-blue-300 italic">
+                                        <i class="fas fa-reply mr-1"></i> Ответ компании: Николай, благодарим за отзыв и высокую оценку нашей работы!
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Отзыв 4 -->
+                            <tr class="table-row-alternate border-b border-blue-800">
+                                <td class="py-4 pr-6">
+                                    <div class="font-medium">Елена М.</div>
+                                </td>
+                                <td class="py-4 pr-6">15.04.2024</td>
+                                <td class="py-4 pr-6">
+                                    <div class="rating-stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                </td>
+                                <td class="py-4 pr-6">Google Maps</td>
+                                <td class="py-4">
+                                    <div class="mb-2">Хорошая компания, работаем с ними больше года. Программное обеспечение стабильное, техподдержка отвечает быстро. Из минусов — не всегда оперативно внедряют обновления.</div>
+                                    <div class="text-sm text-blue-300 italic">
+                                        <i class="fas fa-reply mr-1"></i> Ответ компании: Елена, спасибо за отзыв! Мы ценим долгосрочное сотрудничество и постоянно работаем над улучшением наших продуктов. Учтем ваше замечание про обновления.
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Отзыв 5 -->
+                            <tr class="table-row-alternate border-b border-blue-800">
+                                <td class="py-4 pr-6">
+                                    <div class="font-medium">Сергей Д.</div>
+                                </td>
+                                <td class="py-4 pr-6">10.04.2024</td>
+                                <td class="py-4 pr-6">
+                                    <div class="rating-stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                </td>
+                                <td class="py-4 pr-6">2ГИС</td>
+                                <td class="py-4">
+                                    <div class="mb-2">В целом, нормальное обслуживание. Программа работает стабильно. Есть вопросы по интерфейсу, не самый интуитивно понятный. Хотелось бы больше обучающих материалов.</div>
+                                    <div class="text-sm text-blue-300 italic">
+                                        <i class="fas fa-reply mr-1"></i> Ответ компании: Сергей, благодарим за обратную связь! В ближайшее время планируем выпустить обновленные обучающие материалы и видеоинструкции по работе с интерфейсом.
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-6 text-center">
+                    <button class="btn-blue px-6 py-2 rounded-md">
+                        Показать больше отзывов
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="gradient-bg py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center mb-4">
+                        <img src="https://page.genspark.site/v1/base64_upload/bd9256ebf16b58a0aa025819f1155b9d" alt="Честный отзыв" class="h-10">
+                        <span class="ml-3 text-xl font-bold">Честный отзыв</span>
+                    </div>
+                    <p class="text-sm text-gray-300 mb-4 max-w-md">Сервис анализа достоверности отзывов с использованием искусственного интеллекта. Все оценки достоверности отзывов являются вероятностными и не являются установлением юридических фактов.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-vk"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-white"><i class="far fa-envelope"></i></a>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Навигация</h3>
+                        <ul class="space-y-2 text-gray-300">
+                            <li><a href="index.html" class="hover:text-blue-300">Главная</a></li>
+                            <li><a href="about.html" class="hover:text-blue-300">О сервисе</a></li>
+                            <li><a href="pricing.html" class="hover:text-blue-300">Тарифы</a></li>
+                            <li><a href="faq.html" class="hover:text-blue-300">FAQ</a></li>
+                            <li><a href="contacts.html" class="hover:text-blue-300">Контакты</a></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Правовая информация</h3>
+                        <ul class="space-y-2 text-gray-300">
+                            <li><a href="#" class="hover:text-blue-300">Пользовательское соглашение</a></li>
+                            <li><a href="#" class="hover:text-blue-300">Политика конфиденциальности</a></li>
+                            <li><a href="#" class="hover:text-blue-300">Обработка данных</a></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Контакты</h3>
+                        <ul class="space-y-2 text-gray-300">
+                            <li class="flex items-start">
+                                <i class="fas fa-map-marker-alt mt-1 mr-2"></i>
+                                <span>г. Москва, ул. Ленинская слобода, 19, стр.4</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-phone-alt mr-2"></i>
+                                <span>+7 (495) 123-45-67</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="far fa-envelope mr-2"></i>
+                                <span>info@честный-отзыв.рф</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 pt-4 border-t border-blue-800">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-sm text-gray-300">© 2024 Честный отзыв. Все права защищены.</p>
+                    <p class="text-sm text-gray-300 mt-2 md:mt-0">Сайт использует cookies для улучшения пользовательского опыта</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Инициализация графиков после загрузки страницы
+        document.addEventListener('DOMContentLoaded', function () {
+            // График распределения по источникам
+            const sourcesCtx = document.getElementById('sourcesChart').getContext('2d');
+            const sourcesChart = new Chart(sourcesCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Яндекс.Карты', '2ГИС', 'Отзовик', 'Google Maps'],
+                    datasets: [{
+                        data: [42, 35, 29, 31],
+                        backgroundColor: [
+                            '#3b82f6',
+                            '#10b981',
+                            '#f59e0b',
+                            '#6366f1'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: 'white'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // График распределения оценок
+            const ratingsCtx = document.getElementById('ratingsChart').getContext('2d');
+            const ratingsChart = new Chart(ratingsCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['5★', '4★', '3★', '2★', '1★'],
+                    datasets: [{
+                        label: 'Количество отзывов',
+                        data: [68, 26, 23, 12, 8],
+                        backgroundColor: [
+                            '#4ade80',
+                            '#a3e635',
+                            '#facc15',
+                            '#fb923c',
+                            '#f87171'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: 'white'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: 'white'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+
+            // График активности по месяцам
+            const activityCtx = document.getElementById('activityChart').getContext('2d');
+            const activityChart = new Chart(activityCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Декабрь', 'Январь', 'Февраль', 'Март', 'Апрель', 'Май'],
+                    datasets: [
+                        {
+                            label: 'Положительные',
+                            data: [12, 15, 13, 17, 19, 18],
+                            borderColor: '#4ade80',
+                            backgroundColor: 'rgba(74, 222, 128, 0.1)',
+                            tension: 0.3,
+                            fill: true
+                        },
+                        {
+                            label: 'Нейтральные',
+                            data: [3, 5, 4, 4, 3, 4],
+                            borderColor: '#facc15',
+                            backgroundColor: 'rgba(250, 204, 21, 0.1)',
+                            tension: 0.3,
+                            fill: true
+                        },
+                        {
+                            label: 'Негативные',
+                            data: [4, 3, 5, 2, 3, 3],
+                            borderColor: '#f87171',
+                            backgroundColor: 'rgba(248, 113, 113, 0.1)',
+                            tension: 0.3,
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            stacked: false,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: 'white'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: 'white'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: 'white'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,697 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тарифы - Честный отзыв</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --main-dark-blue: #001B48;
+            --accent-blue: #0077CC;
+            --light-blue: #4FAAFF;
+            --very-light-blue: #E9F5FF;
+            --text-color: #F8FAFC;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--main-dark-blue);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        .logo-container img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .nav-link {
+            position: relative;
+            margin: 0 12px;
+            padding: 5px 0;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+            .nav-link:hover, .nav-link.active {
+                color: var(--light-blue);
+            }
+
+            .nav-link::after {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 2px;
+                bottom: 0;
+                left: 0;
+                background-color: var(--light-blue);
+                transition: width 0.3s ease;
+            }
+
+            .nav-link:hover::after, .nav-link.active::after {
+                width: 100%;
+            }
+
+        .btn-primary {
+            background-color: var(--accent-blue);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            border: 2px solid var(--accent-blue);
+        }
+
+            .btn-primary:hover {
+                background-color: transparent;
+                color: var(--accent-blue);
+            }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--accent-blue);
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            border: 2px solid var(--accent-blue);
+        }
+
+            .btn-outline:hover {
+                background-color: var(--accent-blue);
+                color: white;
+            }
+
+        .slanted-top {
+            position: relative;
+        }
+
+            .slanted-top::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100px;
+                background-color: var(--main-dark-blue);
+                transform: skewY(-3deg);
+                transform-origin: top right;
+                z-index: -1;
+            }
+
+        .slanted-bottom {
+            position: relative;
+            margin-bottom: 50px;
+        }
+
+            .slanted-bottom::after {
+                content: '';
+                position: absolute;
+                bottom: -50px;
+                left: 0;
+                width: 100%;
+                height: 100px;
+                background-color: inherit;
+                transform: skewY(-3deg);
+                transform-origin: bottom left;
+                z-index: -1;
+            }
+
+        .pricing-card {
+            background: linear-gradient(135deg, rgba(0, 35, 90, 0.6) 0%, rgba(0, 51, 102, 0.8) 100%);
+            border-radius: 15px;
+            border: 1px solid rgba(79, 170, 255, 0.3);
+            transition: all 0.3s ease;
+            height: 100%;
+            transform: translateY(0);
+        }
+
+            .pricing-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+                border: 1px solid var(--light-blue);
+            }
+
+            .pricing-card.featured {
+                background: linear-gradient(135deg, rgba(0, 51, 102, 0.8) 0%, rgba(0, 119, 204, 0.9) 100%);
+                transform: scale(1.05);
+                border: 1px solid var(--light-blue);
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+                z-index: 2;
+                position: relative;
+            }
+
+                .pricing-card.featured:hover {
+                    transform: scale(1.05) translateY(-10px);
+                }
+
+        .feature-check {
+            color: var(--light-blue);
+            margin-right: 8px;
+        }
+
+        .feature-none {
+            color: rgba(255, 255, 255, 0.3);
+            margin-right: 8px;
+        }
+
+        .pricing-badge {
+            background-color: var(--accent-blue);
+            color: white;
+            font-weight: 700;
+            font-size: 0.75rem;
+            padding: 5px 15px;
+            border-radius: 20px;
+            position: absolute;
+            top: -10px;
+            right: 20px;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .faq-question {
+            cursor: pointer;
+            font-weight: 600;
+            position: relative;
+            padding-right: 30px;
+        }
+
+            .faq-question::after {
+                content: '+';
+                position: absolute;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 1.2rem;
+                transition: all 0.3s;
+            }
+
+            .faq-question.open::after {
+                content: '-';
+            }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+            .faq-answer.open {
+                max-height: 200px;
+            }
+
+        @media (max-width: 768px) {
+            .pricing-card.featured {
+                transform: scale(1);
+                margin-top: 30px;
+                margin-bottom: 30px;
+            }
+
+                .pricing-card.featured:hover {
+                    transform: translateY(-10px);
+                }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 bg-opacity-90 bg-blue-900 backdrop-filter backdrop-blur-md z-50 px-4 py-3">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="/" class="logo-container flex items-center">
+                    <img src="https://page.genspark.site/v1/base64_upload/bd9256ebf16b58a0aa025819f1155b9d" alt="Честный отзыв">
+                    <span class="text-xl font-bold">Честный отзыв</span>
+                </a>
+            </div>
+
+            <nav class="hidden md:flex items-center">
+                <a href="/" class="nav-link">Главная</a>
+                <a href="/about" class="nav-link">О сервисе</a>
+                <a href="/pricing" class="nav-link active">Тарифы</a>
+                <a href="/faq" class="nav-link">FAQ</a>
+                <a href="/contacts" class="nav-link">Контакты</a>
+            </nav>
+
+            <div class="flex items-center">
+                <a href="/login" class="nav-link hidden md:inline-block">Войти</a>
+                <a href="/register" class="btn-primary ml-4 hidden md:inline-block">Регистрация</a>
+                <button class="md:hidden focus:outline-none">
+                    <i class="fas fa-bars text-white text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="fixed inset-0 bg-blue-900 bg-opacity-95 z-40 hidden flex-col justify-center items-center" id="mobile-menu">
+        <button class="absolute top-6 right-6 focus:outline-none">
+            <i class="fas fa-times text-white text-2xl"></i>
+        </button>
+        <a href="/" class="nav-link text-xl py-4">Главная</a>
+        <a href="/about" class="nav-link text-xl py-4">О сервисе</a>
+        <a href="/pricing" class="nav-link text-xl py-4 active">Тарифы</a>
+        <a href="/faq" class="nav-link text-xl py-4">FAQ</a>
+        <a href="/contacts" class="nav-link text-xl py-4">Контакты</a>
+        <div class="mt-8 flex flex-col items-center">
+            <a href="/login" class="btn-outline w-full text-center mb-4">Войти</a>
+            <a href="/register" class="btn-primary w-full text-center">Регистрация</a>
+        </div>
+    </div>
+
+    <!-- Pricing Hero Section -->
+    <section class="pt-32 pb-20 px-4">
+        <div class="container mx-auto">
+            <div class="flex flex-col items-center text-center mb-16">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Тарифы</h1>
+                <p class="text-xl opacity-80 max-w-2xl">Выберите оптимальный тариф для проверки достоверности отзывов о компаниях и продуктах</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Cards -->
+    <section class="py-16 px-4 bg-blue-800 slanted-top slanted-bottom">
+        <div class="container mx-auto">
+            <div class="flex flex-wrap justify-center items-stretch -mx-4">
+                <!-- Basic Plan -->
+                <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8 md:mb-0">
+                    <div class="pricing-card p-8 flex flex-col">
+                        <div class="mb-6">
+                            <h3 class="text-2xl font-bold mb-2">Basic</h3>
+                            <p class="opacity-75">Идеальное решение для единоразовых проверок</p>
+                        </div>
+
+                        <div class="mb-8">
+                            <div class="flex items-end">
+                                <span class="text-4xl font-bold">199 ₽</span>
+                                <span class="ml-2 opacity-75">/ отчёт</span>
+                            </div>
+                            <p class="text-sm opacity-75 mt-2">Разовая оплата без подписки</p>
+                        </div>
+
+                        <div class="flex-grow mb-8">
+                            <div class="mb-4">
+                                <div class="flex items-start mb-3">
+                                    <i class="fas fa-check feature-check mt-1"></i>
+                                    <span>Полная проверка одной компании</span>
+                                </div>
+                                <div class="flex items-start mb-3">
+                                    <i class="fas fa-check feature-check mt-1"></i>
+                                    <span>Анализ отзывов с 3 платформ</span>
+                                </div>
+                                <div class="flex items-start mb-3">
+                                    <i class="fas fa-check feature-check mt-1"></i>
+                                    <span>Базовый отчет о достоверности</span>
+                                </div>
+                                <div class="flex items-start mb-3">
+                                    <i class="fas fa-check feature-check mt-1"></i>
+                                    <span>Доступ к отчету в течение 30 дней</span>
+                                </div>
+                                <div class="flex items-start mb-3">
+                                    <i class="fas fa-times feature-none mt-1"></i>
+                                    <span class="opacity-50">История проверок</span>
+                                </div>
+                                <div class="flex items-start mb-3">
+                                    <i class="fas fa-times feature-none mt-1"></i>
+                                    <span class="opacity-50">Расширенная аналитика</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="/checkout?plan=basic" class="btn-outline text-center">Выбрать тариф</a>
+                    </div>
+                </div>
+
+                <!-- Standard Plan -->
+                <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8 md:mb-0">
+                    <div class="pricing-card featured p-8 flex flex-col">
+                        <div class="pricing-badge">Популярный</div>
+                        <div class="mb-6">
+                            <h3 class="text-2xl font-bold mb-2">Standard</h3>
+                            <p class="opacity-75">Оптимальное решение для регулярных проверок</p>
+                        </div>
+
+                        <div class="mb-8">
+                            <div class="flex items-end">
+                                <span class="text-4xl font-bold">4 999 ₽</span>
+                                <span class="ml-2 opacity-75">/ месяц</span>
+                            </div>
+                            <p class="text-sm opacity-75 mt-2">100 отчетов в месяц (50 ₽ за отчет)</p>
+                        </div>
+
+                        <div class="flex-grow mb-8">
+                            <div class="mb-4">
+                                <div class="flex items-start mb-3">
+                                    <i class="fas fa-check feature-check mt-1"></i>
+                                    <span>100 проверок компаний в месяц</span>
+                                </div>
+                                <div class="flex items-start mb-3">
+                                    <i class="fas fa-check feature-check mt-1"></i>
+                                    <span>Анализ отзывов с 4 платформ</span>
+                                </div>
+                                <div class="flex items-start mb-3">
+                                    <i class="fas fa-check feature-check mt-1"></i>
+                                    <span>Расширенный отчет о достоверности</span>
+                                </div>
+                                <div class="flex items-start mb-3">
+                                    <i class="fas fa-check feature-check mt-1"></i>
+                                    <span>Доступ к истории проверок</span>
+                                </div>
+                                <div class="flex items-start mb-3">
+                                    <i class="fas fa-check feature-check mt-1"></i>
+                                    <span>Дополнительные отчеты: +120 ₽/шт</span>
+                                </div>
+                                <div class="flex items-start mb-3">
+                                    <i class="fas fa-check feature-check mt-1"></i>
+                                    <span>Выгрузка отчетов в PDF</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="/checkout?plan=standard" class="btn-primary text-center">Выбрать тариф</a>
+                    </div>
+                </div>
+
+                <!-- Premium Plan -->
+                <div class="w-full md:w-1/2 lg:w-1/3 px-4">
+                    <div class="pricing-card p-8 flex flex-col">
+                        <div class="mb-6">
+                            <h3 class="text-2xl font-bold mb-2">Premium</h3>
+                            <p class="opacity-75">Максимальные возможности для профессионалов</p>
+                        </div>
+
+                        <div class="mb-8">
+                            <div class="flex items-end">
+                                <span class="text-4xl font-bold">12 999 ₽</span>
+                                <span class="ml-2 opacity-75">/ месяц</span>
+                            </div>
+                            <p class="text-sm opacity-75 mt-2">Безлимитные проверки + API доступ</p>
+                        </div>
+
+                        <div class="flex-grow mb-8">
+                            <div class="mb-4">
+                                <div class="flex items-start mb-3">
+                                    <i class="fas fa-check feature-check mt-1"></i>
+                                    <span>Неограниченное количество проверок</span>
+                                </div>
+                                <div class="flex items-start mb-3">
+                                    <i class="fas fa-check feature-check mt-1"></i>
+                                    <span>Анализ отзывов со всех платформ</span>
+                                </div>
+                                <div class="flex items-start mb-3">
+                                    <i class="fas fa-check feature-check mt-1"></i>
+                                    <span>Премиум-отчеты с глубокой аналитикой</span>
+                                </div>
+                                <div class="flex items-start mb-3">
+                                    <i class="fas fa-check feature-check mt-1"></i>
+                                    <span>API для интеграции с вашими системами</span>
+                                </div>
+                                <div class="flex items-start mb-3">
+                                    <i class="fas fa-check feature-check mt-1"></i>
+                                    <span>Мониторинг изменений в реальном времени</span>
+                                </div>
+                                <div class="flex items-start mb-3">
+                                    <i class="fas fa-check feature-check mt-1"></i>
+                                    <span>Приоритетная техническая поддержка</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="/checkout?plan=premium" class="btn-outline text-center">Выбрать тариф</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Compare Features -->
+    <section class="py-20 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-16">Сравнение возможностей</h2>
+
+            <div class="overflow-x-auto">
+                <table class="w-full min-w-max">
+                    <thead>
+                        <tr class="border-b border-blue-700">
+                            <th class="text-left pb-4 font-semibold">Функция</th>
+                            <th class="text-center pb-4 font-semibold">Basic</th>
+                            <th class="text-center pb-4 font-semibold">Standard</th>
+                            <th class="text-center pb-4 font-semibold">Premium</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-blue-700/30">
+                            <td class="py-4">Количество отчетов</td>
+                            <td class="py-4 text-center">1 отчет</td>
+                            <td class="py-4 text-center">100 отчетов/месяц</td>
+                            <td class="py-4 text-center">Безлимит</td>
+                        </tr>
+                        <tr class="border-b border-blue-700/30">
+                            <td class="py-4">Источники отзывов</td>
+                            <td class="py-4 text-center">3</td>
+                            <td class="py-4 text-center">4</td>
+                            <td class="py-4 text-center">Все доступные</td>
+                        </tr>
+                        <tr class="border-b border-blue-700/30">
+                            <td class="py-4">Выявление аномалий</td>
+                            <td class="py-4 text-center">Базовое</td>
+                            <td class="py-4 text-center">Расширенное</td>
+                            <td class="py-4 text-center">Премиум</td>
+                        </tr>
+                        <tr class="border-b border-blue-700/30">
+                            <td class="py-4">Экспорт отчетов</td>
+                            <td class="py-4 text-center"><i class="fas fa-times text-red-400"></i></td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-400"></i></td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-400"></i></td>
+                        </tr>
+                        <tr class="border-b border-blue-700/30">
+                            <td class="py-4">История проверок</td>
+                            <td class="py-4 text-center"><i class="fas fa-times text-red-400"></i></td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-400"></i></td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-400"></i></td>
+                        </tr>
+                        <tr class="border-b border-blue-700/30">
+                            <td class="py-4">API доступ</td>
+                            <td class="py-4 text-center"><i class="fas fa-times text-red-400"></i></td>
+                            <td class="py-4 text-center"><i class="fas fa-times text-red-400"></i></td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-400"></i></td>
+                        </tr>
+                        <tr class="border-b border-blue-700/30">
+                            <td class="py-4">Мониторинг в реальном времени</td>
+                            <td class="py-4 text-center"><i class="fas fa-times text-red-400"></i></td>
+                            <td class="py-4 text-center"><i class="fas fa-times text-red-400"></i></td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-400"></i></td>
+                        </tr>
+                        <tr class="border-b border-blue-700/30">
+                            <td class="py-4">Приоритетная поддержка</td>
+                            <td class="py-4 text-center"><i class="fas fa-times text-red-400"></i></td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-400"></i></td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-400"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 px-4 bg-blue-800">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-16">Часто задаваемые вопросы</h2>
+
+            <div class="max-w-3xl mx-auto">
+                <div class="faq-item py-4">
+                    <div class="faq-question font-semibold py-2">
+                        Как оплатить подписку?
+                    </div>
+                    <div class="faq-answer">
+                        <p class="py-3 opacity-80">
+                            Мы принимаем оплату через все популярные платежные системы, включая банковские карты, ЮMoney, Яндекс.Кассу и электронные кошельки. После выбора тарифа вы будете перенаправлены на защищенную страницу оплаты.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item py-4">
+                    <div class="faq-question font-semibold py-2">
+                        Можно ли сменить тариф?
+                    </div>
+                    <div class="faq-answer">
+                        <p class="py-3 opacity-80">
+                            Да, вы можете в любой момент перейти на более высокий тариф. При переходе на более низкий тариф изменения вступят в силу после окончания текущего расчетного периода.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item py-4">
+                    <div class="faq-question font-semibold py-2">
+                        Что произойдет, если я израсходую все отчеты?
+                    </div>
+                    <div class="faq-answer">
+                        <p class="py-3 opacity-80">
+                            На тарифе Standard вы можете приобрести дополнительные отчеты по цене 120 рублей за штуку. Также вы всегда можете перейти на тариф Premium с безлимитными отчетами.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item py-4">
+                    <div class="faq-question font-semibold py-2">
+                        Предоставляете ли вы отчет с юридическим заключением?
+                    </div>
+                    <div class="faq-answer">
+                        <p class="py-3 opacity-80">
+                            Наш сервис предоставляет аналитическую информацию о вероятности накрутки отзывов. Все оценки достоверности отзывов являются вероятностными и не являются установлением юридических фактов. Для юридического заключения рекомендуем обратиться к профильным специалистам.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item py-4">
+                    <div class="faq-question font-semibold py-2">
+                        Как работает API для премиум-пользователей?
+                    </div>
+                    <div class="faq-answer">
+                        <p class="py-3 opacity-80">
+                            API позволяет интегрировать наш сервис в ваши системы и автоматизировать процесс проверки отзывов. После подключения тарифа Premium вы получите доступ к документации API, ключи доступа и техническую поддержку по интеграции.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-4">
+        <div class="container mx-auto max-w-6xl">
+            <div class="bg-gradient-to-r from-blue-700 to-blue-900 rounded-2xl p-12 text-center relative overflow-hidden">
+                <div class="absolute inset-0 opacity-10">
+                    <div class="absolute top-0 left-0 w-40 h-40 bg-blue-400 rounded-full filter blur-3xl"></div>
+                    <div class="absolute bottom-0 right-0 w-60 h-60 bg-blue-300 rounded-full filter blur-3xl"></div>
+                </div>
+
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 relative">Готовы проверить достоверность отзывов?</h2>
+                <p class="text-xl opacity-80 mb-10 max-w-2xl mx-auto relative">Выберите подходящий тариф и получите доступ к профессиональному анализу отзывов уже сегодня.</p>
+
+                <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-6 relative">
+                    <a href="/register" class="btn-primary">Зарегистрироваться</a>
+                    <a href="/demo" class="btn-outline">Посмотреть демо</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="pt-20 pb-10 px-4 bg-blue-900">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-16">
+                <div>
+                    <div class="mb-4 flex items-center">
+                        <img src="https://page.genspark.site/v1/base64_upload/bd9256ebf16b58a0aa025819f1155b9d" alt="Честный отзыв" class="h-8 mr-2">
+                        <span class="text-lg font-bold">Честный отзыв</span>
+                    </div>
+                    <p class="opacity-70 mb-4">Профессиональный сервис для анализа достоверности отзывов о компаниях и продуктах.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="opacity-70 hover:opacity-100 transition-opacity">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="opacity-70 hover:opacity-100 transition-opacity">
+                            <i class="fab fa-vk"></i>
+                        </a>
+                        <a href="#" class="opacity-70 hover:opacity-100 transition-opacity">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Навигация</h3>
+                    <ul class="space-y-3">
+                        <li><a href="/" class="opacity-70 hover:opacity-100 transition-opacity">Главная</a></li>
+                        <li><a href="/about" class="opacity-70 hover:opacity-100 transition-opacity">О сервисе</a></li>
+                        <li><a href="/pricing" class="opacity-70 hover:opacity-100 transition-opacity">Тарифы</a></li>
+                        <li><a href="/faq" class="opacity-70 hover:opacity-100 transition-opacity">FAQ</a></li>
+                        <li><a href="/contacts" class="opacity-70 hover:opacity-100 transition-opacity">Контакты</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Юридическая информация</h3>
+                    <ul class="space-y-3">
+                        <li><a href="/terms" class="opacity-70 hover:opacity-100 transition-opacity">Пользовательское соглашение</a></li>
+                        <li><a href="/privacy" class="opacity-70 hover:opacity-100 transition-opacity">Политика конфиденциальности</a></li>
+                        <li><a href="/cookies" class="opacity-70 hover:opacity-100 transition-opacity">Политика использования файлов cookie</a></li>
+                        <li><a href="/payment" class="opacity-70 hover:opacity-100 transition-opacity">Способы оплаты</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Контакты</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope opacity-70 mt-1 mr-3"></i>
+                            <span>support@honest-review.ru</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone opacity-70 mt-1 mr-3"></i>
+                            <span>8 (800) 123-45-67</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt opacity-70 mt-1 mr-3"></i>
+                            <span>г. Москва, ул. Примерная, д. 123</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-blue-800 pt-8 mt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="opacity-70 text-sm text-center md:text-left">© 2024 Честный отзыв. Все права защищены.</p>
+                    <p class="opacity-70 text-sm text-center md:text-right mt-4 md:mt-0">Сервис анализа достоверности отзывов с использованием искусственного интеллекта. Все оценки достоверности отзывов являются вероятностными и не являются установлением юридических фактов.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.querySelector('button.md\\:hidden');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const closeButton = mobileMenu.querySelector('button');
+
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.remove('hidden');
+                mobileMenu.classList.add('flex');
+                document.body.style.overflow = 'hidden';
+            });
+
+            closeButton.addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+                document.body.style.overflow = 'auto';
+            });
+
+            // FAQ accordions
+            const faqQuestions = document.querySelectorAll('.faq-question');
+
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+
+                    this.classList.toggle('open');
+
+                    if (answer.classList.contains('open')) {
+                        answer.classList.remove('open');
+                    } else {
+                        answer.classList.add('open');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
